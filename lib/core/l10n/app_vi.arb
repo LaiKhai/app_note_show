@@ -1,0 +1,18 @@
+{
+  "app_name": "Người xử lý lỗi",
+  "no_route_found": "Không tìm thấy tuyến đường",
+  "success": "thành công",
+  "cancel": "Hủy bỏ",
+  "bad_request_error": "yêu cầu xấu.thử lại sau",
+  "no_content": "Thành công với không nội dung",
+  "forbidden_error": "Yêu cầu bị cấm. Hãy thử lại sau",
+  "unauthorized_error": "Người dùng trái phép, hãy thử lại sau ",
+  "not_found_error":"URL không tìm thấy, hãy thử lại sau",
+  "conflict_error": "Xung đột tìm thấy, hãy thử lại sau",
+  "internal_server_error": "Có gì đó không ổn, hãy thử lại sau",
+  "unknown_error": "Có gì đó không ổn, hãy thử lại sau",
+  "timeout_error":"Thời gian ra ngoài, hãy thử lại muộn",
+  "default_error": "Có gì đó không ổn, hãy thử lại sau",
+  "cache_error": "Lỗi bộ đệm, hãy thử lại sau",
+  "no_internet_error": "Xin vui lòng kiểm tra kết nối Internet của bạn"
+}

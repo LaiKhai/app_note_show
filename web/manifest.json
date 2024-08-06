@@ -1,6 +1,6 @@
 {
-    "name": "app_note_show",
-    "short_name": "app_note_show",
+    "name": "flutter_base_project",
+    "short_name": "flutter_base_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
