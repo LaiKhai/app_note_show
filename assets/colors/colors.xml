@@ -2,6 +2,7 @@
 <resources>
     <color name="bgAppBar">#F7A220</color>
     <color name="bgLight">#FFF8E7</color>
+    <color name="colorSelectRange">#AD5C00</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

@@ -4,6 +4,8 @@ import 'package:flutter_base_project/view/pages/calendar/index.dart';
 class CalendarPage extends StatefulWidget {
   static const String routeName = '/calendar';
 
+  const CalendarPage({super.key});
+
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -14,10 +16,7 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendar'),
-      ),
-      body: CalendarScreen(calendarBloc: _calendarBloc),
+      body: SafeArea(child: CalendarScreen(calendarBloc: _calendarBloc)),
     );
   }
 }

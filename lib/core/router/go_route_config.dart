@@ -11,7 +11,7 @@ class GoRouteConfig {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return CalendarPage();
+          return const CalendarPage();
         },
       ),
       GoRoute(

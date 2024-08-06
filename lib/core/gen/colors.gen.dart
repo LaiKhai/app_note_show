@@ -76,6 +76,9 @@ class ColorName {
   /// Color: #3669C9
   static const Color colorSecondaryLight = Color(0xFF3669C9);
 
+  /// Color: #AD5C00
+  static const Color colorSelectRange = Color(0xFFAD5C00);
+
   /// Color: #0E141C
   static const Color colorSplash = Color(0xFF0E141C);
 
