@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/core/di.dart';
-import 'package:flutter_base_project/core/gen/colors.gen.dart';
-import 'package:flutter_base_project/core/gen/fonts.gen.dart';
-import 'package:flutter_base_project/core/router/go_route_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
+import 'core/di.dart';
+import 'core/gen/colors.gen.dart';
+import 'core/gen/fonts.gen.dart';
+import 'core/router/go_route_config.dart';
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initAppModule();
-
+  configureDependencies();
   runApp(const MainApp());
 }
 

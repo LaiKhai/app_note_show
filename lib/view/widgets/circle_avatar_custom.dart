@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:Noteshow/view/res/responsive/reponsive_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/core/gen/assets.gen.dart';
-import 'package:flutter_base_project/view/res/responsive/reponsive_extension.dart';
-import 'package:flutter_base_project/view/widgets/widget_image_asset/image_asset_custom.dart';
+
+import '../../core/gen/assets.gen.dart';
+import 'widget_image_asset/image_asset_custom.dart';
 
 class CircleAvatarCustom extends StatelessWidget {
   const CircleAvatarCustom({

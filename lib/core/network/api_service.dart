@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_base_project/core/constans.dart';
+
+import '../constans.dart';
 
 class ApiService {
   final Dio _dio;

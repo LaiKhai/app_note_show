@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 
+import '../create_show_detail/index.dart';
+
 abstract class CalendarState extends Equatable {
-  CalendarState();
+  const CalendarState();
 
   @override
   List<Object> get props => [];
@@ -9,8 +11,7 @@ abstract class CalendarState extends Equatable {
 
 /// UnInitialized
 class UnCalendarState extends CalendarState {
-
-  UnCalendarState();
+  const UnCalendarState();
 
   @override
   String toString() => 'UnCalendarState';
@@ -18,22 +19,22 @@ class UnCalendarState extends CalendarState {
 
 /// Initialized
 class InCalendarState extends CalendarState {
-  InCalendarState(this.hello);
-  
-  final String hello;
+  const InCalendarState(this.lstDataEvent);
+
+  final List<DateTime> lstDataEvent;
 
   @override
-  String toString() => 'InCalendarState $hello';
+  String toString() => 'InCalendarState $lstDataEvent';
 
   @override
-  List<Object> get props => [hello];
+  List<Object> get props => [lstDataEvent];
 }
 
 class ErrorCalendarState extends CalendarState {
-  ErrorCalendarState(this.errorMessage);
- 
+  const ErrorCalendarState(this.errorMessage);
+
   final String errorMessage;
-  
+
   @override
   String toString() => 'ErrorCalendarState';
 

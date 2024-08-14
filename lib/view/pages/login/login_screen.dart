@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_base_project/core/gen/assets.gen.dart';
-import 'package:flutter_base_project/core/gen/colors.gen.dart';
-import 'package:flutter_base_project/view/res/responsive/dimen.dart';
-import 'package:flutter_base_project/view/res/responsive/reponsive_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_base_project/view/pages/login/index.dart';
+
+import '../../../core/gen/assets.gen.dart';
+import '../../../core/gen/colors.gen.dart';
+import '../../res/responsive/dimen.dart';
+import 'index.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({

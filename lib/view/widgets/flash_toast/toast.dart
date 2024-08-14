@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/main.dart';
-import 'package:flutter_base_project/view/widgets/flash_toast/flash.dart';
 
+import '../../../main.dart';
 import '../../res/responsive/reponsive_extension.dart';
+import 'flash.dart';
 
 // void showToast(
 //   String title,

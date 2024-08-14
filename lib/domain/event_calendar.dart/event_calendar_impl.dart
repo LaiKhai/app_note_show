@@ -1,26 +1,16 @@
-import 'package:flutter_base_project/data/repository/hive_repo.dart';
+import 'package:Noteshow/domain/event_calendar.dart/event_calendar_model.dart';
+import 'package:Noteshow/domain/services/isar_services.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../core/di.dart';
+import '../../data/repository/event_calendar_repo.dart';
+
 @singleton
-class EventCalendarImpl implements HiveRepo {
+class EventCalendarImpl implements EventCalendarRepo {
   @override
-  Future<void> create() async {}
-
-  @override
-  Future<void> delete() {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> read() {
-    // TODO: implement read
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> update() {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> createEventCalendar(EventCalendar eventCalendar) async {
+    final IsarServices isarServices = di.get();
+    await isarServices.updateData(eventCalendar);
   }
 }

@@ -39,5 +39,19 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#0C0C0C</color>
 
+    <color name="noteColor1">#AFE6A7</color>
+    <color name="noteColor2">#A8E6DA</color>
+    <color name="noteColor3">#E6ACA8</color>
+    <color name="noteColor4">#E6D6A8</color>
+    <color name="noteColor5">#BFA8E6</color>
+    <color name="noteColor6">#E6A8DF</color>
+    <color name="noteColor7">#E3DE6F</color>
+    <color name="noteColor8">#7BC043</color>
+
+    <color name="bgTagPaid">#4E8534</color>
+    <color name="bgTagUnPaid">#BF1000</color>
+
+
+
 
 </resources>

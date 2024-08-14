@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/core/gen/colors.gen.dart';
-import 'package:flutter_base_project/view/pages/login/index.dart';
-import 'package:flutter_base_project/view/res/responsive/dimen.dart';
+
+import 'index.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';

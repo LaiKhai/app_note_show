@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/core/gen/fonts.gen.dart';
+
+import '../../core/gen/index.dart';
 
 class FontConstants {
   static const String fontDMSans = FontFamily.dMSans;

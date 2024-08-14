@@ -1,16 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
+
+import '../create_show_detail/index.dart';
 
 abstract class HomeState extends Equatable {
-  HomeState();
+  const HomeState();
 
   @override
-  List<Object> get props => [];
+  List<dynamic> get props => [];
 }
 
 /// UnInitialized
 class UnHomeState extends HomeState {
-
-  UnHomeState();
+  const UnHomeState();
 
   @override
   String toString() => 'UnHomeState';
@@ -18,22 +20,36 @@ class UnHomeState extends HomeState {
 
 /// Initialized
 class InHomeState extends HomeState {
-  InHomeState(this.hello);
-  
-  final String hello;
+  const InHomeState(this.lstEventCalendar, this.mergedList);
+
+  final List<EventCalendar> lstEventCalendar;
+  final List<DateTime> mergedList;
 
   @override
-  String toString() => 'InHomeState $hello';
+  String toString() => 'InHomeState $lstEventCalendar';
 
   @override
-  List<Object> get props => [hello];
+  List<dynamic> get props => [lstEventCalendar, mergedList];
+}
+
+class FilterHomeState extends HomeState {
+  const FilterHomeState(this.lstEventCalendar, this.mergedList);
+
+  final List<EventCalendar> lstEventCalendar;
+  final List<DateTime> mergedList;
+
+  @override
+  String toString() => 'FilterHomeState $lstEventCalendar';
+
+  @override
+  List<Object> get props => [lstEventCalendar, mergedList];
 }
 
 class ErrorHomeState extends HomeState {
-  ErrorHomeState(this.errorMessage);
- 
+  const ErrorHomeState(this.errorMessage);
+
   final String errorMessage;
-  
+
   @override
   String toString() => 'ErrorHomeState';
 

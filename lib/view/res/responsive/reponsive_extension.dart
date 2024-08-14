@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/view/res/responsive/size_config.dart';
+
+import 'size_config.dart';
 
 extension Reponsive on num {
   double get w => SizeConfig.instance.getWidth(this) ?? 0;

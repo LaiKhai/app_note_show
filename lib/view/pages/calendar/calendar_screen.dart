@@ -1,11 +1,11 @@
+import 'package:Noteshow/view/pages/create_show_detail/index.dart';
+import 'package:Noteshow/view/pages/home/home_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_base_project/core/gen/colors.gen.dart';
-import 'package:flutter_base_project/view/res/responsive/dimen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_base_project/view/pages/calendar/index.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+import '../../../main.dart';
+import 'index.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({
@@ -24,6 +24,7 @@ class CalendarScreen extends StatefulWidget {
 class CalendarScreenState extends State<CalendarScreen> {
   final DateRangePickerController _controller = DateRangePickerController();
   final List<String> views = <String>['Month', 'Year', 'Decade', 'Century'];
+  List<DateTime> lstBlackoutDate = [];
   CalendarScreenState();
 
   @override
@@ -34,6 +35,7 @@ class CalendarScreenState extends State<CalendarScreen> {
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
   }
 
@@ -67,23 +69,31 @@ class CalendarScreenState extends State<CalendarScreen> {
             ));
           }
           if (currentState is InCalendarState) {
+            lstBlackoutDate = currentState.lstDataEvent;
             return SfDateRangePicker(
               controller: _controller,
               initialSelectedRange:
                   PickerDateRange(DateTime.now(), DateTime.now()),
               backgroundColor: ColorName.bgLight,
-              selectionMode: DateRangePickerSelectionMode.range,
+              selectionMode: DateRangePickerSelectionMode.multiple,
               selectionTextStyle: const TextStyle(color: Colors.white),
-              selectionColor: ColorName.bgLight,
+              selectionColor: ColorName.bgAppBar,
               startRangeSelectionColor: ColorName.bgAppBar,
               rangeSelectionColor: ColorName.colorSelectRange,
               endRangeSelectionColor: ColorName.bgAppBar,
               headerHeight: 70,
-              monthViewSettings: const DateRangePickerMonthViewSettings(
+              monthViewSettings: DateRangePickerMonthViewSettings(
+                  blackoutDates: currentState.lstDataEvent,
                   dayFormat: 'EE',
-                  viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                  viewHeaderStyle: const DateRangePickerViewHeaderStyle(
                       textStyle: TextStyle(fontWeight: FontWeight.bold))),
               monthCellStyle: const DateRangePickerMonthCellStyle(
+                  blackoutDateTextStyle: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      color: ColorName.white),
+                  blackoutDatesDecoration: BoxDecoration(
+                      color: ColorName.colorGrey1, shape: BoxShape.circle),
                   todayTextStyle: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -125,6 +135,23 @@ class CalendarScreenState extends State<CalendarScreen> {
                   }
                 }
               },
+              onSubmit: (p0) {
+                if (_controller.selectedDates != null &&
+                    _controller.selectedDates!.isNotEmpty) {
+                  GoRouter.of(context).push(CreateShowDetailPage.routeName,
+                      extra: {'controller': _controller});
+                } else {
+                  ScaffoldMessenger.of(navigatorKey.currentContext!)
+                      .showSnackBar(
+                    const SnackBar(content: Text('Please select date')),
+                  );
+                }
+              },
+              onCancel: () {
+                GoRouter.of(context).pushReplacement(HomePage.routeName);
+              },
+              confirmText: "NEXT",
+              showActionButtons: true,
             );
           }
           return const Center(

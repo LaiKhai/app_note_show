@@ -19,6 +19,12 @@ class ColorName {
   /// Color: #FFF8E7
   static const Color bgLight = Color(0xFFFFF8E7);
 
+  /// Color: #4E8534
+  static const Color bgTagPaid = Color(0xFF4E8534);
+
+  /// Color: #BF1000
+  static const Color bgTagUnPaid = Color(0xFFBF1000);
+
   /// Color: #000000
   static const Color black = Color(0xFF000000);
 
@@ -90,6 +96,30 @@ class ColorName {
 
   /// Color: #FFFFFF
   static const Color colorWhite = Color(0xFFFFFFFF);
+
+  /// Color: #AFE6A7
+  static const Color noteColor1 = Color(0xFFAFE6A7);
+
+  /// Color: #A8E6DA
+  static const Color noteColor2 = Color(0xFFA8E6DA);
+
+  /// Color: #E6ACA8
+  static const Color noteColor3 = Color(0xFFE6ACA8);
+
+  /// Color: #E6D6A8
+  static const Color noteColor4 = Color(0xFFE6D6A8);
+
+  /// Color: #BFA8E6
+  static const Color noteColor5 = Color(0xFFBFA8E6);
+
+  /// Color: #E6A8DF
+  static const Color noteColor6 = Color(0xFFE6A8DF);
+
+  /// Color: #E3DE6F
+  static const Color noteColor7 = Color(0xFFE3DE6F);
+
+  /// Color: #7BC043
+  static const Color noteColor8 = Color(0xFF7BC043);
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);

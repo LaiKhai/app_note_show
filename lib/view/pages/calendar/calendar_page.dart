@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/view/pages/calendar/index.dart';
+
+import 'index.dart';
 
 class CalendarPage extends StatefulWidget {
   static const String routeName = '/calendar';
@@ -7,11 +8,11 @@ class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
   @override
-  _CalendarPageState createState() => _CalendarPageState();
+  CalendarPageState createState() => CalendarPageState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
-  final _calendarBloc = CalendarBloc(UnCalendarState());
+class CalendarPageState extends State<CalendarPage> {
+  final _calendarBloc = CalendarBloc(const UnCalendarState());
 
   @override
   Widget build(BuildContext context) {

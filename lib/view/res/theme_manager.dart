@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/core/gen/colors.gen.dart';
-import 'package:flutter_base_project/view/res/responsive/dimen.dart';
-import 'package:flutter_base_project/view/res/font_manager.dart';
-import 'package:flutter_base_project/view/res/style_manager.dart';
+
+import '../../core/gen/colors.gen.dart';
+import 'font_manager.dart';
+import 'responsive/dimen.dart';
+import 'style_manager.dart';
 
 abstract class MainThemeApp {
   late ThemeData themeData;
