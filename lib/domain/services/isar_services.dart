@@ -39,18 +39,29 @@ class IsarServices implements IsarRepo {
   @override
   Future filterDateTime(startDate, endDate) async {
     final isar = await db;
-    //Use the Isar query API to filter users based on specific criteria and return the first matching result.
-    final favorites = isar.eventCalendars
+    // //Use the Isar query API to filter users based on specific criteria and return the first matching result.
+    // final favorites = isar.eventCalendars
+    //     .filter()
+    //     // .startDateEqualTo(startDate).
+    //     .startDateBetween(startDate, endDate)
+    //     .and()
+    //     .endDateBetween(startDate, endDate)
+    //     .findAllSync();
+
+    final preliminaryResults = isar.eventCalendars
         .filter()
-        .startDateGreaterThan(startDate)
+        .startDateBetween(startDate, endDate)
         .or()
-        .startDateEqualTo(startDate)
-        .and()
-        .endDateLessThan(endDate)
-        .or()
-        .endDateLessThan(endDate)
+        .endDateBetween(startDate, endDate)
         .findAllSync();
-    return favorites;
+
+    final filteredResults = preliminaryResults.where((event) {
+      return event.listDate?.any((date) =>
+              (date.isAfter(startDate) || date.isAtSameMomentAs(startDate)) &&
+              (date.isBefore(endDate) || date.isAtSameMomentAs(endDate))) ??
+          false;
+    }).toList();
+    return filteredResults;
   }
 
   @override

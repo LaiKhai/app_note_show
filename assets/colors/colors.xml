@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bgAppBar">#F7A220</color>
-    <color name="bgLight">#FFF8E7</color>
+    <color name="bgAppBar">#0FC2B5</color>
+    <color name="bgLight">#FFE8F5E9</color>
     <color name="colorSelectRange">#AD5C00</color>
 
     <color name="white">#FFFFFF</color>

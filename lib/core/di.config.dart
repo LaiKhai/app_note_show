@@ -11,11 +11,12 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../domain/event_calendar.dart/event_calendar_impl.dart' as _i3;
-import '../domain/home_page.dart/home_page_impl.dart' as _i4;
-import '../domain/services/isar_services.dart' as _i6;
-import '../view/pages/home/index.dart' as _i5;
-import 'network/network_controller.dart' as _i7;
+import '../domain/event_calendar.dart/event_calendar_impl.dart' as _i4;
+import '../domain/home_page.dart/home_page_impl.dart' as _i5;
+import '../domain/services/isar_services.dart' as _i7;
+import '../view/pages/home/index.dart' as _i6;
+import '../view/widgets/bottom_sheet_wiget/bottom_sheet_widget.dart' as _i3;
+import 'network/network_controller.dart' as _i8;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -28,13 +29,14 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.singleton<_i3.EventCalendarImpl>(() => _i3.EventCalendarImpl());
-    gh.singleton<_i4.HomePageImpl>(
-        () => _i4.HomePageImpl(homeBlocImpl: gh<_i5.HomeBloc>()));
-    gh.singleton<_i6.IsarServices>(() => _i6.IsarServices());
-    await gh.singletonAsync<_i7.NetworkController>(
+    gh.singleton<_i3.BottomSheetModal>(() => _i3.BottomSheetModal());
+    gh.singleton<_i4.EventCalendarImpl>(() => _i4.EventCalendarImpl());
+    gh.singleton<_i5.HomePageImpl>(
+        () => _i5.HomePageImpl(homeBlocImpl: gh<_i6.HomeBloc>()));
+    gh.singleton<_i7.IsarServices>(() => _i7.IsarServices());
+    await gh.singletonAsync<_i8.NetworkController>(
       () {
-        final i = _i7.NetworkController();
+        final i = _i8.NetworkController();
         return i.onInit().then((_) => i);
       },
       preResolve: true,

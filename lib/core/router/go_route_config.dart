@@ -1,12 +1,12 @@
-import 'package:Noteshow/view/pages/create_show_detail/index.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+import 'package:Noteshow/view/pages/create_show_detail/index.dart';
 
 import '../../main.dart';
 import '../../view/pages/calendar/index.dart';
 import '../../view/pages/home/index.dart';
 import '../../view/pages/login/index.dart';
+import '../../view/pages/profile/profile/index.dart';
 
 class GoRouteConfig {
   static final GoRouter router = GoRouter(
@@ -42,6 +42,12 @@ class GoRouteConfig {
         path: HomePage.routeName,
         builder: (BuildContext context, GoRouterState state) {
           return const HomePage();
+        },
+      ),
+      GoRoute(
+        path: ProfilePage.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ProfilePage();
         },
       ),
     ],

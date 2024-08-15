@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 class ColorName {
   ColorName._();
 
-  /// Color: #F7A220
-  static const Color bgAppBar = Color(0xFFF7A220);
+  /// Color: #0FC2B5
+  static const Color bgAppBar = Color(0xFF0FC2B5);
 
-  /// Color: #FFF8E7
-  static const Color bgLight = Color(0xFFFFF8E7);
+  /// Color: #FFE8F5E9
+  static const Color bgLight = Color(0xFFE8F5E9);
 
   /// Color: #4E8534
   static const Color bgTagPaid = Color(0xFF4E8534);

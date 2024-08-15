@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'core/di.dart';
@@ -27,7 +28,12 @@ class MainApp extends StatelessWidget {
           routerConfig: GoRouteConfig.router,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          builder: EasyLoading.init(),
           theme: ThemeData(
+              colorScheme: const ColorScheme.light(
+                primary: ColorName.bgAppBar,
+                secondary: ColorName.bgLight,
+              ),
               fontFamily: FontFamily.dMSans,
               appBarTheme:
                   const AppBarTheme(backgroundColor: ColorName.bgAppBar),
@@ -38,4 +44,20 @@ class MainApp extends StatelessWidget {
       },
     );
   }
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
 }
