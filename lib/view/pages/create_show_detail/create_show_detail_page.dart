@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:Noteshow/view/pages/create_show_detail/index.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CreateShowDetailPage extends StatefulWidget {
   static const String routeName = '/createShowDetail';

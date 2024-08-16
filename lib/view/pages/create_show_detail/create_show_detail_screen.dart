@@ -232,6 +232,11 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorName.bgAppBar,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s8))),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
 // Validate returns true if the form is valid, or false otherwise.\
@@ -251,6 +256,8 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                   isPaid: false);
                               await eventCalendarImpl
                                   .createEventCalendar(eventCalendar);
+                              await eventCalendarImpl
+                                  .createEventToCalendarDevice(eventCalendar);
 
                               ScaffoldMessenger.of(navigatorKey.currentContext!)
                                   .showSnackBar(
@@ -261,7 +268,10 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                   .pushReplacement(HomePage.routeName);
                             }
                           },
-                          child: const Text('Submit'),
+                          child: const Text(
+                            'Create Event',
+                            style: TextStyle(color: ColorName.white),
+                          ),
                         ),
                       ),
                     ],

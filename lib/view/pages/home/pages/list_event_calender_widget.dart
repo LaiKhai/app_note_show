@@ -1,10 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:Noteshow/view/widgets/expanded_long_text_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import 'package:Noteshow/view/widgets/expanded_long_text_widget.dart';
+
 import '../../../../domain/home_page.dart/home_page_impl.dart';
+import '../../../widgets/dialog_widget/confirm_dialog_widget.dart';
 import '../../create_show_detail/index.dart';
 import '../index.dart';
 
@@ -29,22 +33,28 @@ class ListEventCalendarWidget extends StatelessWidget {
               color: Colors.transparent,
               margin: const EdgeInsets.all(AppMargin.m8),
               child: Slidable(
-                  // Specify a key if the Slidable is dismissible.
                   key: const ValueKey(0),
-
-                  // The start action pane is the one at the left or the top side.
                   startActionPane: ActionPane(
-                    // A motion is a widget used to control how the pane animates.
                     motion: const ScrollMotion(),
-
-                    // A pane can dismiss the Slidable.
-
-                    // All actions are defined in the children parameter.
                     children: [
-                      // A SlidableAction can have an icon and/or a label.
                       SlidableAction(
                         onPressed: (context) {
-                          homePageImpl.delete(lstEventCalendar[index].id);
+                          showDialog(
+                              context: context,
+                              builder: (context) => ConfirmDialog(
+                                    bodyText: "You want to delete ",
+                                    specialText: lstEventCalendar[index].name!,
+                                    acceptText: 'Yes',
+                                    denyText: 'No',
+                                    onAccept: () {
+                                      homePageImpl
+                                          .delete(lstEventCalendar[index].id);
+                                      GoRouter.of(context).pop();
+                                    },
+                                    onDeny: () {
+                                      GoRouter.of(context).pop();
+                                    },
+                                  ));
                         },
                         borderRadius:
                             const BorderRadius.all(Radius.circular(AppSize.s8)),

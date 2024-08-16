@@ -45,6 +45,10 @@ class $AssetsImagesGen {
   AssetGenImage get emptyAvatar =>
       const AssetGenImage('assets/images/empty_avatar.jpg');
 
+  /// File path: assets/images/empty_page.png
+  AssetGenImage get emptyPage =>
+      const AssetGenImage('assets/images/empty_page.png');
+
   /// File path: assets/images/loading.gif
   AssetGenImage get loading => const AssetGenImage('assets/images/loading.gif');
 
@@ -53,7 +57,8 @@ class $AssetsImagesGen {
       const SvgGenImage('assets/images/login_icon.svg');
 
   /// List of all assets
-  List<dynamic> get values => [appIcon, emptyAvatar, loading, loginIcon];
+  List<dynamic> get values =>
+      [appIcon, emptyAvatar, emptyPage, loading, loginIcon];
 }
 
 class Assets {
