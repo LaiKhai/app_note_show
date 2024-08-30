@@ -15,7 +15,6 @@ class EventCalendar {
   bool? isPaid;
   DateTime? startDate;
   DateTime? endDate;
-  List<DateTime>? listDate;
   EventCalendar({
     this.id = Isar.autoIncrement,
     this.name,
@@ -25,7 +24,6 @@ class EventCalendar {
     this.isPaid,
     this.startDate,
     this.endDate,
-    this.listDate,
   });
 
   Map<String, dynamic> toMap() {
@@ -36,12 +34,8 @@ class EventCalendar {
       'price': price,
       'decription': decription,
       'isPaid': isPaid,
-      'startDate':
-          startDate?.toIso8601String(), // Chuyển đổi DateTime thành chuỗi
-      'endDate': endDate?.toIso8601String(), // Chuyển đổi DateTime thành chuỗi
-      'listDate': listDate
-          ?.map((date) => date.toIso8601String())
-          .toList(), // Chuyển đổi List<DateTime> thành danh sách chuỗi
+      'startDate': startDate?.toIso8601String(),
+      'endDate': endDate?.toIso8601String(),
     };
   }
 
@@ -59,9 +53,6 @@ class EventCalendar {
       endDate: map['endDate'] != null
           ? DateTime.parse(map['endDate'] as String)
           : null,
-      listDate: (map['listDate'] as List<dynamic>?)
-          ?.map((date) => DateTime.parse(date as String))
-          .toList(),
     );
   }
 

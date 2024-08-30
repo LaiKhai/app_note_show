@@ -5,6 +5,7 @@ import 'package:Noteshow/domain/services/isar_services.dart';
 import 'package:Noteshow/view/pages/create_show_detail/index.dart';
 import 'package:meta/meta.dart';
 
+import '../home/index.dart';
 import 'index.dart';
 
 @immutable
@@ -29,15 +30,7 @@ class LoadCalendarEvent extends CalendarEvent {
     try {
       yield const UnCalendarState();
       final listEvent = await isarServices.getAllData();
-      List<List<DateTime>> lstDateTime = [];
-      for (var element in listEvent) {
-        if (element.listDate != null) {
-          lstDateTime.add(element.listDate!);
-        }
-      }
-
-      List<DateTime> mergedList =
-          lstDateTime.expand((innerList) => innerList).toList();
+      List<DateTime> mergedList = groupDateTime(listEvent);
 
       yield InCalendarState(mergedList);
     } catch (_, stackTrace) {

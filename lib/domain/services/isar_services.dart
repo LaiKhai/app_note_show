@@ -56,10 +56,10 @@ class IsarServices implements IsarRepo {
         .findAllSync();
 
     final filteredResults = preliminaryResults.where((event) {
-      return event.listDate?.any((date) =>
-              (date.isAfter(startDate) || date.isAtSameMomentAs(startDate)) &&
-              (date.isBefore(endDate) || date.isAtSameMomentAs(endDate))) ??
-          false;
+      return (event.startDate!.isAfter(startDate) ||
+              event.startDate!.isAtSameMomentAs(startDate)) &&
+          (event.endDate!.isBefore(endDate) ||
+              event.endDate!.isAtSameMomentAs(endDate));
     }).toList();
     return filteredResults;
   }

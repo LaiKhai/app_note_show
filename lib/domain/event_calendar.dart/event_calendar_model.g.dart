@@ -32,28 +32,23 @@ const EventCalendarSchema = CollectionSchema(
       name: r'isPaid',
       type: IsarType.bool,
     ),
-    r'listDate': PropertySchema(
-      id: 3,
-      name: r'listDate',
-      type: IsarType.dateTimeList,
-    ),
     r'local': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'local',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'name',
       type: IsarType.string,
     ),
     r'price': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'price',
       type: IsarType.string,
     ),
     r'startDate': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'startDate',
       type: IsarType.dateTime,
     )
@@ -82,12 +77,6 @@ int _eventCalendarEstimateSize(
     final value = object.decription;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.listDate;
-    if (value != null) {
-      bytesCount += 3 + value.length * 8;
     }
   }
   {
@@ -120,11 +109,10 @@ void _eventCalendarSerialize(
   writer.writeString(offsets[0], object.decription);
   writer.writeDateTime(offsets[1], object.endDate);
   writer.writeBool(offsets[2], object.isPaid);
-  writer.writeDateTimeList(offsets[3], object.listDate);
-  writer.writeString(offsets[4], object.local);
-  writer.writeString(offsets[5], object.name);
-  writer.writeString(offsets[6], object.price);
-  writer.writeDateTime(offsets[7], object.startDate);
+  writer.writeString(offsets[3], object.local);
+  writer.writeString(offsets[4], object.name);
+  writer.writeString(offsets[5], object.price);
+  writer.writeDateTime(offsets[6], object.startDate);
 }
 
 EventCalendar _eventCalendarDeserialize(
@@ -138,11 +126,10 @@ EventCalendar _eventCalendarDeserialize(
     endDate: reader.readDateTimeOrNull(offsets[1]),
     id: id,
     isPaid: reader.readBoolOrNull(offsets[2]),
-    listDate: reader.readDateTimeList(offsets[3]),
-    local: reader.readStringOrNull(offsets[4]),
-    name: reader.readStringOrNull(offsets[5]),
-    price: reader.readStringOrNull(offsets[6]),
-    startDate: reader.readDateTimeOrNull(offsets[7]),
+    local: reader.readStringOrNull(offsets[3]),
+    name: reader.readStringOrNull(offsets[4]),
+    price: reader.readStringOrNull(offsets[5]),
+    startDate: reader.readDateTimeOrNull(offsets[6]),
   );
   return object;
 }
@@ -161,14 +148,12 @@ P _eventCalendarDeserializeProp<P>(
     case 2:
       return (reader.readBoolOrNull(offset)) as P;
     case 3:
-      return (reader.readDateTimeList(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
-    case 7:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -578,169 +563,6 @@ extension EventCalendarQueryFilter
         property: r'isPaid',
         value: value,
       ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'listDate',
-      ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'listDate',
-      ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateElementEqualTo(DateTime value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'listDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateElementGreaterThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'listDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateElementLessThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'listDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateElementBetween(
-    DateTime lower,
-    DateTime upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'listDate',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateLengthEqualTo(int length) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'listDate',
-        length,
-        true,
-        length,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'listDate',
-        0,
-        true,
-        0,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'listDate',
-        0,
-        false,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'listDate',
-        0,
-        true,
-        length,
-        include,
-      );
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'listDate',
-        length,
-        include,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
-      listDateLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'listDate',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
     });
   }
 
@@ -1497,12 +1319,6 @@ extension EventCalendarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<EventCalendar, EventCalendar, QDistinct> distinctByListDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'listDate');
-    });
-  }
-
   QueryBuilder<EventCalendar, EventCalendar, QDistinct> distinctByLocal(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1554,13 +1370,6 @@ extension EventCalendarQueryProperty
   QueryBuilder<EventCalendar, bool?, QQueryOperations> isPaidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isPaid');
-    });
-  }
-
-  QueryBuilder<EventCalendar, List<DateTime>?, QQueryOperations>
-      listDateProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'listDate');
     });
   }
 

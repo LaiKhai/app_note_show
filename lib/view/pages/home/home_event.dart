@@ -103,17 +103,18 @@ class FilterDateTimeDataEvent extends HomeEvent {
 }
 
 List<DateTime> groupDateTime(List<EventCalendar> lstEventCalendar) {
-  List<DateTime> mergedListDate = lstEventCalendar.fold(
-    <DateTime>[],
-    (accumulator, event) {
-      if (event.listDate != null) {
-        accumulator.addAll(event.listDate!);
-      }
-      return accumulator;
-    },
-  );
-
-  mergedListDate.sort();
-
-  return mergedListDate;
+  return lstEventCalendar
+      .expand((event) {
+        if (event.startDate != null && event.endDate != null) {
+          return List.generate(
+            event.endDate!.difference(event.startDate!).inDays + 1,
+            (index) => event.startDate!.add(Duration(days: index)),
+          );
+        } else {
+          return <DateTime>[];
+        }
+      })
+      .toSet()
+      .toList()
+    ..sort();
 }

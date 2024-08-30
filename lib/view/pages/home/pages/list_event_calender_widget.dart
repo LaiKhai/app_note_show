@@ -191,7 +191,7 @@ class ListEventCalendarWidget extends StatelessWidget {
                               Text(
                                   '${DateFormat('dd/MM/yyyy').format(lstEventCalendar[index].startDate ?? DateTime.now())} -'
                                   // ignore: lines_longer_than_80_chars
-                                  ' ${DateFormat('dd/MM/yyyy').format(lstEventCalendar[index].endDate ?? lstEventCalendar[index].startDate ?? DateTime.now())}',
+                                  ' ${DateFormat.jms().format(lstEventCalendar[index].startDate ?? DateTime.now())}',
                                   style: const TextStyle(
                                       color: ColorName.white,
                                       fontWeight: FontWeight.bold)),

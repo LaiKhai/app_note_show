@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../main.dart';
+import '../../widgets/empty_page.dart';
 import '../calendar/calendar_page.dart';
 import 'index.dart';
 
@@ -101,45 +102,18 @@ class HomeScreenState extends State<HomeScreen>
           }
           if (currentState is InHomeState) {
             return currentState.lstEventCalendar.isEmpty
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Assets.images.emptyPage.image(),
-                      ),
-                      const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            child: Text(
-                              "No notes have been created yet! Create your own note!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: ColorName.colorGrey2),
-                            ),
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              try {
-                                GoRouter.of(navigatorKey.currentContext!)
-                                    .go(CalendarPage.routeName);
-                              } on PlatformException catch (e) {
-                                print(e);
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorName.bgAppBar,
-                            ),
-                            child: const Text(
-                              "Go to create note",
-                              style: TextStyle(color: ColorName.white),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                ? EmptyPage(
+                    bodyText:
+                        "No notes have been created yet! Create your own note!",
+                    onPressedText: "Go to create note",
+                    onPressed: () {
+                      try {
+                        GoRouter.of(navigatorKey.currentContext!)
+                            .go(CalendarPage.routeName);
+                      } on PlatformException catch (e) {
+                        print(e);
+                      }
+                    },
                   )
                 : ListEventCalendarWidget(
                     controller: controller,
