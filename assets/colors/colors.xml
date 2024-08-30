@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bgAppBar">#0FC2B5</color>
+    <color name="bgLight">#FFE8F5E9</color>
+    <color name="colorSelectRange">#AD5C00</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="colorPrimaryLight">#3669C9</color>
+    <color name="colorPrimaryDark">#3669C9</color>
+
+    <color name="colorSecondaryLight">#3669C9</color>
+    <color name="colorSecondaryDark">#3669C9</color>
+
+    <color name="colorBackgroundLight">#FFFFFF</color>
+    <color name="colorBackgroundDark">#0C0C0C</color>
+
+    <color name="colorTextFieldLight">#FAFAFA</color>
+    <color name="colorTextFieldDark">#FAFAFA</color>
+
+    <color name="colorPlaceHolderLight">#C4C5C4</color>
+    <color name="colorPlaceHolderDark">#C4C5C4</color>
+
+    <color name="colorFontPrimaryLight">#0C1A30</color>
+    <color name="colorFontPrimaryDark">#0C1A30</color>
+
+    <color name="colorFontSecondaryLight">#838589</color>
+    <color name="colorFontSecondaryDark">#838589</color>
+
+    <color name="colorCardLight">#E7E7E7</color>
+    <color name="colorCardDark">#0E141C</color>
+
+    <color name="colorSplash">#0E141C</color>
+
+    <color name="colorGrey1">#DBD6CE</color>
+    <color name="colorGrey2">#797979</color>
+    <color name="colorError">#e61f34</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#0C0C0C</color>
+
+    <color name="noteColor1">#AFE6A7</color>
+    <color name="noteColor2">#A8E6DA</color>
+    <color name="noteColor3">#E6ACA8</color>
+    <color name="noteColor4">#E6D6A8</color>
+    <color name="noteColor5">#BFA8E6</color>
+    <color name="noteColor6">#E6A8DF</color>
+    <color name="noteColor7">#E3DE6F</color>
+    <color name="noteColor8">#7BC043</color>
+
+    <color name="bgTagPaid">#4E8534</color>
+    <color name="bgTagUnPaid">#BF1000</color>
+
+
+
+
+</resources>

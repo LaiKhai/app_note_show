@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <application
-        android:label="app_note_show"
+        android:label="NoteShow"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
