@@ -1,18 +1,133 @@
 {
   "app_name": "Error handler",
+  "@app_name": {
+    "description": "The name of the application."
+  },
+
   "no_route_found": "No Route Found",
+  "@no_route_found": {
+    "description": "Message displayed when a route is not found."
+  },
+
   "success": "success",
+  "@success": {
+    "description": "Message displayed when an operation is successful."
+  },
+
   "cancel": "cancel",
+  "@cancel": {
+    "description": "Label for canceling an action."
+  },
+
   "bad_request_error": "bad request. try again later",
+  "@bad_request_error": {
+    "description": "Message displayed when the server returns a bad request error."
+  },
+
   "no_content": "success with not content",
+  "@no_content": {
+    "description": "Message displayed when the operation succeeds but there is no content."
+  },
+
   "forbidden_error": "forbidden request. try again later",
+  "@forbidden_error": {
+    "description": "Message displayed when a forbidden request error occurs."
+  },
+
   "unauthorized_error": "user unauthorized, try again later",
+  "@unauthorized_error": {
+    "description": "Message displayed when the user is unauthorized."
+  },
+
   "not_found_error": "url not found, try again later",
+  "@not_found_error": {
+    "description": "Message displayed when the requested URL is not found."
+  },
+
   "conflict_error": "conflict found, try again later",
+  "@conflict_error": {
+    "description": "Message displayed when a conflict occurs."
+  },
+
   "internal_server_error": "some thing went wrong, try again later",
+  "@internal_server_error": {
+    "description": "Message displayed when an internal server error occurs."
+  },
+
   "unknown_error": "some thing went wrong, try again later",
-  "timeout_error": "time out, try again late",
+  "@unknown_error": {
+
+    "description": "Message displayed for any unknown error."
+  },
+
+  "timeout_error": "time out, try again later",
+  "@timeout_error": {
+    "description": "Message displayed when a request times out."
+  },
+
   "default_error": "some thing went wrong, try again later",
+  "@default_error": {
+    "description": "Default error message for general issues."
+  },
+
   "cache_error": "cache error, try again later",
-  "no_internet_error": "Please check your internet connection"
+  "@cache_error": {
+    "description": "Message displayed when there is a cache error."
+  },
+
+  "reload": "reload",
+  "@reload": {
+    "description": "Label for reloading content."
+  },
+
+  "selectDate": "Please select date",
+  "@selectDate": {
+    "description": "Message prompting the user to select a date."
+  },
+
+  "senDataSuccessfull": "Send data successfully",
+  "@senDataSuccessfull": {
+    "description": "Message confirming that data was sent successfully."
+  },
+
+  "profile": "Profile",
+  "@profile": {
+    "description": "Label for accessing the user's profile."
+  },
+  
+  "emptyPage": "No notes have been created yet! Create your own note!",
+  "@emptyPage": {
+    "description": "Label for accessing the user's profile."
+  },
+
+  "createNote": "Go to create note",
+  "@createNote": {
+    "description": "Go to create note"
+  },
+
+
+  "contentDelete": "You want to delete",
+  "@contentDelete": {
+    "description": "You want to delete"
+  },
+
+  "accept": "Yes",
+  "@accept": {
+    "description": "Yes"
+  },
+
+  "labelDelete": "Delete",
+  "@labelDelete": {
+    "description": "Delete"
+  },
+  "unpaid": "UnPaid",
+  "@unpaid": {
+    "description": "UnPaid"
+  },
+  "paid": "Paid",
+  "@paid": {
+    "description": "Paid"
+  }
+
+  
 }

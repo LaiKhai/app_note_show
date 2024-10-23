@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:Noteshow/view/pages/profile/profile/index.dart';
 
+import '../../../../index.dart';
 import '../../create_show_detail/index.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -79,7 +80,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ElevatedButton(
                     onPressed: _load,
-                    child: const Text('reload'),
+                    child: Text(AppLocalizations.of(context)!.reload),
                   ),
                 ),
               ],

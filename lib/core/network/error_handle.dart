@@ -61,7 +61,7 @@ enum DataSource {
 
 extension DataSourceExtension on DataSource {
   Failure getFailure() {
-    var mContext = navigatorKey!.currentState!.context;
+    var mContext = navigatorKey.currentState!.context;
     switch (this) {
       case DataSource.SUCCESS:
         return Failure(
@@ -99,8 +99,8 @@ extension DataSourceExtension on DataSource {
         return Failure(ResponseCode.CACHE_ERROR,
             AppLocalizations.of(mContext)!.cache_error);
       case DataSource.NO_INTERNET_CONNECTION:
-        return Failure(ResponseCode.NO_INTERNET_CONNECTION,
-            AppLocalizations.of(mContext)!.no_internet_error);
+      //   return Failure(ResponseCode.NO_INTERNET_CONNECTION,
+      //       AppLocalizations.of(mContext)!.no_internet_error);
       case DataSource.DEFAULT:
         return Failure(
             ResponseCode.DEFAULT, AppLocalizations.of(mContext)!.default_error);

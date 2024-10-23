@@ -12,5 +12,5 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:Noteshow/view/pages/create_show_detail/index.dart';
 export 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 export 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
+export 'package:go_router/go_router.dart';
 export '../../../domain/event_calendar.dart/event_calendar_impl.dart';

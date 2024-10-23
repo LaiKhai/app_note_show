@@ -981,7 +981,7 @@ class FlashBar extends StatefulWidget {
   ///
   /// Typically this is a list of [TextButton] widgets.
   ///
-  /// These widgets will be wrapped in a [ButtonBar], which introduces 8 pixels
+  /// These widgets will be wrapped in a [OverflowBar], which introduces 8 pixels
   /// of padding on each side.
   final List<Widget>? actions;
 
@@ -1144,7 +1144,7 @@ class _FlashBarState extends State<FlashBar>
               if (_isActionsPresent)
                 ButtonTheme(
                   padding: EdgeInsets.symmetric(horizontal: buttonRightPadding),
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: widget.actions!,
                   ),
                 ),
@@ -1198,7 +1198,7 @@ class _FlashBarState extends State<FlashBar>
               if (_isActionsPresent)
                 ButtonTheme(
                   padding: EdgeInsets.symmetric(horizontal: buttonRightPadding),
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: widget.actions!,
                   ),
                 ),
@@ -1252,7 +1252,7 @@ class _FlashBarState extends State<FlashBar>
               if (_isActionsPresent)
                 ButtonTheme(
                   padding: EdgeInsets.symmetric(horizontal: buttonRightPadding),
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: widget.actions!,
                   ),
                 ),
@@ -1312,7 +1312,7 @@ class _FlashBarState extends State<FlashBar>
               if (_isActionsPresent)
                 ButtonTheme(
                   padding: EdgeInsets.symmetric(horizontal: buttonRightPadding),
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: widget.actions!,
                   ),
                 ),

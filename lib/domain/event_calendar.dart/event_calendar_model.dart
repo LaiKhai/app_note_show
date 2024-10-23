@@ -8,6 +8,8 @@ part 'event_calendar_model.g.dart';
 @collection
 class EventCalendar {
   Id id = Isar.autoIncrement;
+  String? calendarId;
+  String? eventId;
   String? name;
   String? local;
   String? price;
@@ -17,6 +19,8 @@ class EventCalendar {
   DateTime? endDate;
   EventCalendar({
     this.id = Isar.autoIncrement,
+    this.calendarId,
+    this.eventId,
     this.name,
     this.local,
     this.price,
@@ -29,6 +33,8 @@ class EventCalendar {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'calendarId': calendarId,
+      'eventId': eventId,
       'name': name,
       'local': local,
       'price': price,
@@ -42,6 +48,8 @@ class EventCalendar {
   factory EventCalendar.fromMap(Map<String, dynamic> map) {
     return EventCalendar(
       id: map['id'] as int,
+      calendarId: map['calendarId'] as String?,
+      eventId: map['eventId'] as String?,
       name: map['name'] as String?,
       local: map['local'] as String?,
       price: map['price'] as String?,

@@ -17,38 +17,48 @@ const EventCalendarSchema = CollectionSchema(
   name: r'EventCalendar',
   id: -1794784561446776128,
   properties: {
-    r'decription': PropertySchema(
+    r'calendarId': PropertySchema(
       id: 0,
+      name: r'calendarId',
+      type: IsarType.string,
+    ),
+    r'decription': PropertySchema(
+      id: 1,
       name: r'decription',
       type: IsarType.string,
     ),
     r'endDate': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'endDate',
       type: IsarType.dateTime,
     ),
+    r'eventId': PropertySchema(
+      id: 3,
+      name: r'eventId',
+      type: IsarType.string,
+    ),
     r'isPaid': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'isPaid',
       type: IsarType.bool,
     ),
     r'local': PropertySchema(
-      id: 3,
+      id: 5,
       name: r'local',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'name',
       type: IsarType.string,
     ),
     r'price': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'price',
       type: IsarType.string,
     ),
     r'startDate': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'startDate',
       type: IsarType.dateTime,
     )
@@ -74,7 +84,19 @@ int _eventCalendarEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.calendarId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.decription;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.eventId;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -106,13 +128,15 @@ void _eventCalendarSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.decription);
-  writer.writeDateTime(offsets[1], object.endDate);
-  writer.writeBool(offsets[2], object.isPaid);
-  writer.writeString(offsets[3], object.local);
-  writer.writeString(offsets[4], object.name);
-  writer.writeString(offsets[5], object.price);
-  writer.writeDateTime(offsets[6], object.startDate);
+  writer.writeString(offsets[0], object.calendarId);
+  writer.writeString(offsets[1], object.decription);
+  writer.writeDateTime(offsets[2], object.endDate);
+  writer.writeString(offsets[3], object.eventId);
+  writer.writeBool(offsets[4], object.isPaid);
+  writer.writeString(offsets[5], object.local);
+  writer.writeString(offsets[6], object.name);
+  writer.writeString(offsets[7], object.price);
+  writer.writeDateTime(offsets[8], object.startDate);
 }
 
 EventCalendar _eventCalendarDeserialize(
@@ -122,14 +146,16 @@ EventCalendar _eventCalendarDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = EventCalendar(
-    decription: reader.readStringOrNull(offsets[0]),
-    endDate: reader.readDateTimeOrNull(offsets[1]),
+    calendarId: reader.readStringOrNull(offsets[0]),
+    decription: reader.readStringOrNull(offsets[1]),
+    endDate: reader.readDateTimeOrNull(offsets[2]),
+    eventId: reader.readStringOrNull(offsets[3]),
     id: id,
-    isPaid: reader.readBoolOrNull(offsets[2]),
-    local: reader.readStringOrNull(offsets[3]),
-    name: reader.readStringOrNull(offsets[4]),
-    price: reader.readStringOrNull(offsets[5]),
-    startDate: reader.readDateTimeOrNull(offsets[6]),
+    isPaid: reader.readBoolOrNull(offsets[4]),
+    local: reader.readStringOrNull(offsets[5]),
+    name: reader.readStringOrNull(offsets[6]),
+    price: reader.readStringOrNull(offsets[7]),
+    startDate: reader.readDateTimeOrNull(offsets[8]),
   );
   return object;
 }
@@ -144,16 +170,20 @@ P _eventCalendarDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
+      return (reader.readStringOrNull(offset)) as P;
+    case 7:
+      return (reader.readStringOrNull(offset)) as P;
+    case 8:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -256,6 +286,160 @@ extension EventCalendarQueryWhere
 
 extension EventCalendarQueryFilter
     on QueryBuilder<EventCalendar, EventCalendar, QFilterCondition> {
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'calendarId',
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'calendarId',
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'calendarId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'calendarId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'calendarId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'calendarId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'calendarId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'calendarId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'calendarId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'calendarId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'calendarId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      calendarIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'calendarId',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
       decriptionIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -480,6 +664,160 @@ extension EventCalendarQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'eventId',
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'eventId',
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'eventId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'eventId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'eventId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'eventId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'eventId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'eventId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'eventId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'eventId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'eventId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterFilterCondition>
+      eventIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'eventId',
+        value: '',
       ));
     });
   }
@@ -1110,6 +1448,19 @@ extension EventCalendarQueryLinks
 
 extension EventCalendarQuerySortBy
     on QueryBuilder<EventCalendar, EventCalendar, QSortBy> {
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> sortByCalendarId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'calendarId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy>
+      sortByCalendarIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'calendarId', Sort.desc);
+    });
+  }
+
   QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> sortByDecription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'decription', Sort.asc);
@@ -1132,6 +1483,18 @@ extension EventCalendarQuerySortBy
   QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> sortByEndDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'endDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> sortByEventId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eventId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> sortByEventIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eventId', Sort.desc);
     });
   }
 
@@ -1199,6 +1562,19 @@ extension EventCalendarQuerySortBy
 
 extension EventCalendarQuerySortThenBy
     on QueryBuilder<EventCalendar, EventCalendar, QSortThenBy> {
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> thenByCalendarId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'calendarId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy>
+      thenByCalendarIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'calendarId', Sort.desc);
+    });
+  }
+
   QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> thenByDecription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'decription', Sort.asc);
@@ -1221,6 +1597,18 @@ extension EventCalendarQuerySortThenBy
   QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> thenByEndDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'endDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> thenByEventId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eventId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QAfterSortBy> thenByEventIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eventId', Sort.desc);
     });
   }
 
@@ -1300,6 +1688,13 @@ extension EventCalendarQuerySortThenBy
 
 extension EventCalendarQueryWhereDistinct
     on QueryBuilder<EventCalendar, EventCalendar, QDistinct> {
+  QueryBuilder<EventCalendar, EventCalendar, QDistinct> distinctByCalendarId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'calendarId', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<EventCalendar, EventCalendar, QDistinct> distinctByDecription(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1310,6 +1705,13 @@ extension EventCalendarQueryWhereDistinct
   QueryBuilder<EventCalendar, EventCalendar, QDistinct> distinctByEndDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'endDate');
+    });
+  }
+
+  QueryBuilder<EventCalendar, EventCalendar, QDistinct> distinctByEventId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'eventId', caseSensitive: caseSensitive);
     });
   }
 
@@ -1355,6 +1757,12 @@ extension EventCalendarQueryProperty
     });
   }
 
+  QueryBuilder<EventCalendar, String?, QQueryOperations> calendarIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'calendarId');
+    });
+  }
+
   QueryBuilder<EventCalendar, String?, QQueryOperations> decriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'decription');
@@ -1364,6 +1772,12 @@ extension EventCalendarQueryProperty
   QueryBuilder<EventCalendar, DateTime?, QQueryOperations> endDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'endDate');
+    });
+  }
+
+  QueryBuilder<EventCalendar, String?, QQueryOperations> eventIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'eventId');
     });
   }
 

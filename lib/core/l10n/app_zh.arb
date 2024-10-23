@@ -1,18 +1,131 @@
 {
-  "app_name": "错误处理程序",
-  "no_route_found": "未找到路线",
+  "app_name": "错误处理器",
+  "@app_name": {
+    "description": "应用程序的名称。"
+  },
+
+  "no_route_found": "未找到路由",
+  "@no_route_found": {
+    "description": "当找不到路由时显示的消息。"
+  },
+
   "success": "成功",
+  "@success": {
+    "description": "操作成功时显示的消息。"
+  },
+
   "cancel": "取消",
-  "bad_request_error": "请求错误。请稍后重试",
-  "no_content": "成功与不满足",
-  "forbidden_error": "禁止请求。请稍后重试",
-  "unauthorized_error": "用戶未經授權，稍後再試",
-  "not_found_error": "找不到 url，稍後再試",
-  "conflict_error": "發現衝突，稍後再試",
-  "internal_server_error": "出了問題，請稍後再試",
-  "unknown_error": "出了問題，請稍後再試",
-  "timeout_error": "超時，再試一次",
-  "default_error": "出了問題，請稍後再試",
-  "cache_error": "緩存錯誤，稍後再試",
-  "no_internet_error": "請檢查您的互聯網連接"
+  "@cancel": {
+    "description": "取消操作的标签。"
+  },
+
+  "bad_request_error": "请求错误，请稍后再试",
+  "@bad_request_error": {
+    "description": "服务器返回错误请求时显示的消息。"
+  },
+
+  "no_content": "成功，但无内容",
+  "@no_content": {
+    "description": "操作成功但没有内容时显示的消息。"
+  },
+
+  "forbidden_error": "请求被禁止，请稍后再试",
+  "@forbidden_error": {
+    "description": "发生禁止请求错误时显示的消息。"
+  },
+
+  "unauthorized_error": "用户未经授权，请稍后再试",
+  "@unauthorized_error": {
+    "description": "用户未经授权时显示的消息。"
+  },
+
+  "not_found_error": "未找到 URL，请稍后再试",
+  "@not_found_error": {
+    "description": "请求的 URL 未找到时显示的消息。"
+  },
+
+  "conflict_error": "发现冲突，请稍后再试",
+  "@conflict_error": {
+    "description": "发生冲突时显示的消息。"
+  },
+
+  "internal_server_error": "发生错误，请稍后再试",
+  "@internal_server_error": {
+    "description": "发生服务器内部错误时显示的消息。"
+  },
+
+  "unknown_error": "发生未知错误，请稍后再试",
+  "@unknown_error": {
+    "description": "任何未知错误时显示的消息。"
+  },
+
+  "timeout_error": "请求超时，请稍后再试",
+  "@timeout_error": {
+    "description": "请求超时时显示的消息。"
+  },
+
+  "default_error": "发生错误，请稍后再试",
+  "@default_error": {
+    "description": "常规问题的默认错误消息。"
+  },
+
+  "cache_error": "缓存错误，请稍后再试",
+  "@cache_error": {
+    "description": "发生缓存错误时显示的消息。"
+  },
+
+  "reload": "重新加载",
+  "@reload": {
+    "description": "重新加载内容的标签。"
+  },
+
+  "selectDate": "请选择日期",
+  "@selectDate": {
+    "description": "提示用户选择日期的消息。"
+  },
+
+  "senDataSuccessfull": "数据发送成功",
+  "@senDataSuccessfull": {
+    "description": "确认数据成功发送的消息。"
+  },
+
+  "profile": "个人资料",
+  "@profile": {
+    "description": "访问用户个人资料的标签。"
+  },
+  
+  "emptyPage": "还没有创建笔记！创建你自己的笔记！",
+  "@emptyPage": {
+    "description": "提示用户创建笔记的消息。"
+  },
+
+  "createNote": "去创建笔记",
+  "@createNote": {
+    "description": "去创建笔记"
+  },
+
+  "contentDelete": "你想删除",
+  "@contentDelete": {
+    "description": "你想删除"
+  },
+
+  "accept": "是",
+  "@accept": {
+    "description": "是"
+  },
+
+  "labelDelete": "删除",
+  "@labelDelete": {
+    "description": "删除"
+  },
+
+  "unpaid": "未支付",
+  "@unpaid": {
+    "description": "未支付"
+  },
+
+  "paid": "已支付",
+  "@paid": {
+    "description": "已支付"
+  }
 }

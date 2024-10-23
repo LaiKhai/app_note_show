@@ -1,11 +1,7 @@
-import 'package:Noteshow/view/res/responsive/reponsive_extension.dart';
+import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../../../main.dart';
-import '../../widgets/empty_page.dart';
-import '../home/home_page.dart';
-import 'index.dart';
+import '../../../index.dart';
 
 class CreateShowDetailScreen extends StatefulWidget {
   const CreateShowDetailScreen({
@@ -23,8 +19,6 @@ class CreateShowDetailScreen extends StatefulWidget {
 }
 
 class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
-  CreateShowDetailScreenState();
-
   final EventCalendarImpl eventCalendarImpl = di.get();
 
   late final List<GlobalKey<FormState>> _formKeys;
@@ -34,8 +28,13 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
   late final List<TextEditingController> titleController;
   late final List<TextEditingController> priceController;
   late final List<TextEditingController> decriptionController;
+  final TextEditingController calendarController = TextEditingController();
+  late final List<DateTime>? startTime;
+  late final List<DateTime>? endTime;
+
   List<DateTime>? listSelectTime = [];
   TimeOfDay selectedTime = TimeOfDay.now();
+  Calendar calendar = Calendar();
 
   @override
   void initState() {
@@ -57,6 +56,20 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
           listSelectTime!.length, (index) => TextEditingController());
       decriptionController = List.generate(
           listSelectTime!.length, (index) => TextEditingController());
+      startTime = widget.controller.selectedDates!.map((date) {
+        final now = DateTime.now();
+        return DateTime(
+                date.year,
+                date.month,
+                date.day,
+                now.hour, // Current hour
+                now.minute // Current minute
+                )
+            .add(const Duration(minutes: 30));
+      }).toList();
+
+      endTime =
+          startTime!.map((date) => date.add(const Duration(hours: 1))).toList();
     }
 
     _load();
@@ -100,7 +113,7 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ElevatedButton(
                     onPressed: _load,
-                    child: const Text('reload'),
+                    child: Text(AppLocalizations.of(context)!.reload),
                   ),
                 ),
               ],
@@ -119,7 +132,7 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                             try {
                               GoRouter.of(navigatorKey.currentContext!).pop();
                             } on PlatformException catch (e) {
-                              print(e);
+                              debugPrint("$e");
                             }
                           },
                         ),
@@ -212,6 +225,41 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                                         AppSize.s8))),
                                       ),
                                     ),
+
+                                    // //TODO: Select calendar
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: AppSize.s16),
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: DropdownMenu<Calendar>(
+                                          initialSelection:
+                                              currentState.calendars!.first,
+                                          controller: calendarController,
+                                          requestFocusOnTap: false,
+                                          label: Text(currentState
+                                                  .calendars!.first.name ??
+                                              ""),
+                                          onSelected: (Calendar? value) {
+                                            setState(() {
+                                              calendar = value!;
+                                            });
+                                          },
+                                          dropdownMenuEntries: currentState
+                                              .calendars!
+                                              .map<DropdownMenuEntry<Calendar>>(
+                                                  (Calendar calendar) {
+                                            return DropdownMenuEntry<Calendar>(
+                                              value: calendar,
+                                              label: calendar.name ?? "",
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
+                                    ),
+
+                                    //TODO: date time
                                     const Padding(
                                       padding:
                                           EdgeInsets.only(bottom: AppSize.s8),
@@ -222,6 +270,7 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                     ),
+
                                     //TODO: date time
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -238,7 +287,7 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                               ],
                                               decoration: InputDecoration(
                                                   hintText: DateFormat(
-                                                          'dd/MM/yyyy')
+                                                          Constants.DAY_FORMAT)
                                                       .format(widget.controller
                                                               .selectedDates![
                                                           index]),
@@ -257,8 +306,8 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                                 left: AppSize.s8),
                                             child: GestureDetector(
                                                 onTap: () async {
-                                                  await _selectTime(
-                                                      context, index);
+                                                  await _selectTime(startTime,
+                                                      context, index, true);
                                                 },
                                                 child: Container(
                                                   // margin: const EdgeInsets.all(15.0),
@@ -274,10 +323,90 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                                               ColorName.black)),
                                                   child: Center(
                                                     child: Text(
-                                                      DateFormat.jms().format(
-                                                          widget.controller
-                                                                  .selectedDates![
+                                                      DateFormat(Constants
+                                                              .HOUR_FORMAT)
+                                                          .format(startTime![
                                                               index]),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: const TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                )),
+                                          ),
+                                          const SizedBox(width: AppSize.s10),
+                                        ],
+                                      ),
+                                    ),
+                                    //TODO: end date time
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.only(bottom: AppSize.s8),
+                                      child: Text(
+                                        "End Time",
+                                        style: TextStyle(
+                                            color: ColorName.black,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+
+                                    //TODO: end date time
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: AppSize.s16),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: TextFormField(
+                                              // The validator receives the text that the user has entered.
+
+                                              enabled: false,
+                                              autofillHints: const [
+                                                AutofillHints.username
+                                              ],
+                                              decoration: InputDecoration(
+                                                  hintText: DateFormat(
+                                                          Constants.DAY_FORMAT)
+                                                      .format(widget.controller
+                                                              .selectedDates![
+                                                          index]),
+                                                  border: OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color: ColorName.black,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              AppSize.s8))),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: AppSize.s8),
+                                            child: GestureDetector(
+                                                onTap: () async {
+                                                  await _selectTime(endTime,
+                                                      context, index, false);
+                                                },
+                                                child: Container(
+                                                  // margin: const EdgeInsets.all(15.0),
+                                                  height: 55,
+                                                  padding:
+                                                      const EdgeInsets.all(3.0),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      border: Border.all(
+                                                          color:
+                                                              ColorName.black)),
+                                                  child: Center(
+                                                    child: Text(
+                                                      DateFormat(Constants
+                                                              .HOUR_FORMAT)
+                                                          .format(
+                                                              endTime![index]),
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: const TextStyle(
@@ -328,7 +457,8 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                                         BorderRadius.circular(
                                                             AppSize.s8))),
                                             onPressed: () async {
-                                              await _createEventCalendar(index);
+                                              await _createEventCalendar(
+                                                  index, calendar);
                                             },
                                             child: const Text(
                                               'Create Event',
@@ -387,27 +517,27 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
         });
   }
 
-  Future<void> _createEventCalendar(int index) async {
+  Future<void> _createEventCalendar(int index, Calendar calendar) async {
     if (_formKeys[index].currentState!.validate()) {
       // Validate returns true if the form is valid, or false otherwise.\
       final eventCalendar = EventCalendar(
           name: titleController[index].text,
           price: priceController[index].text,
           decription: decriptionController[index].text,
-          startDate: widget.controller.selectedDates != null
-              ? widget.controller.selectedDates![index]
-              : DateTime.now(),
-          endDate: widget.controller.selectedDates != null
-              ? widget.controller.selectedDates![index]
-              : DateTime.now(),
+          startDate: startTime != null ? startTime![index] : DateTime.now(),
+          endDate: endTime != null ? endTime![index] : DateTime.now(),
           isPaid: false);
-      await eventCalendarImpl.createEventCalendar(eventCalendar);
-      await eventCalendarImpl.createEventToCalendarDevice(eventCalendar);
 
-      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
-        const SnackBar(content: Text('Send data successfully')),
-      );
-      _removeEvent(index);
+      final createEventDevice = await eventCalendarImpl
+          .createEventToCalendarDevice(eventCalendar, calendar);
+      if (createEventDevice?.isSuccess ?? false) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.senDataSuccessfull),
+          ),
+        );
+        _removeEvent(index);
+      }
     }
   }
 
@@ -438,21 +568,68 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
     }
   }
 
-  Future<void> _selectTime(BuildContext context, int index) async {
+  Future<void> _selectTime(List<DateTime>? initialDate, BuildContext context,
+      int index, bool isStart) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime:
           TimeOfDay.fromDateTime(widget.controller.selectedDates![index]),
     );
+
     if (picked != null) {
       setState(() {
-        widget.controller.selectedDates![index] = DateTime(
+        final selectedDate = DateTime(
           widget.controller.selectedDates![index].year,
           widget.controller.selectedDates![index].month,
           widget.controller.selectedDates![index].day,
           picked.hour,
           picked.minute,
         );
+
+        // Get the current time for comparison
+        final now = DateTime.now();
+        final currentDate =
+            DateTime(now.year, now.month, now.day, now.hour, now.minute);
+
+        // Check if the selected date is today
+        if (selectedDate.isBefore(currentDate) &&
+            selectedDate.year == now.year &&
+            selectedDate.month == now.month &&
+            selectedDate.day == now.day) {
+          startTime![index] = DateTime.now().add(const Duration(minutes: 30));
+          endTime![index] = startTime![index].add(const Duration(hours: 1));
+          // Show error message if the selected time is earlier than the current time today
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                  'Selected time must be later than the current time if today.'),
+            ),
+          );
+          return; // Exit the function early
+        }
+
+        if (isStart) {
+          // Update startTime at the given index
+          startTime![index] = selectedDate;
+
+          // If endTime exists and is earlier than startTime, reset endTime
+          if (endTime![index].isBefore(startTime![index])) {
+            endTime![index] = startTime![index].add(const Duration(hours: 1));
+          }
+        } else {
+          // If endTime is earlier than startTime, show an error and reset endTime
+          if (selectedDate.isBefore(startTime![index])) {
+            endTime![index] = startTime![index].add(const Duration(hours: 1));
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('End time cannot be earlier than start time'),
+              ),
+            );
+          } else {
+            // Update endTime at the given index
+            endTime![index] = selectedDate;
+          }
+        }
       });
     }
   }

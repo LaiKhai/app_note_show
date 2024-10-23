@@ -1,12 +1,8 @@
 import 'package:Noteshow/core/di.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/home_page.dart/home_page_impl.dart';
-import '../../main.dart';
 
 @singleton
 class NetworkController {

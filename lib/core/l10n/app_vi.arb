@@ -1,18 +1,131 @@
 {
-  "app_name": "Người xử lý lỗi",
-  "no_route_found": "Không tìm thấy tuyến đường",
+  "app_name": "Trình xử lý lỗi",
+  "@app_name": {
+    "description": "Tên của ứng dụng."
+  },
+
+  "no_route_found": "Không tìm thấy đường dẫn",
+  "@no_route_found": {
+    "description": "Thông báo hiển thị khi không tìm thấy đường dẫn."
+  },
+
   "success": "thành công",
-  "cancel": "Hủy bỏ",
-  "bad_request_error": "yêu cầu xấu.thử lại sau",
-  "no_content": "Thành công với không nội dung",
-  "forbidden_error": "Yêu cầu bị cấm. Hãy thử lại sau",
-  "unauthorized_error": "Người dùng trái phép, hãy thử lại sau ",
-  "not_found_error":"URL không tìm thấy, hãy thử lại sau",
-  "conflict_error": "Xung đột tìm thấy, hãy thử lại sau",
-  "internal_server_error": "Có gì đó không ổn, hãy thử lại sau",
-  "unknown_error": "Có gì đó không ổn, hãy thử lại sau",
-  "timeout_error":"Thời gian ra ngoài, hãy thử lại muộn",
-  "default_error": "Có gì đó không ổn, hãy thử lại sau",
-  "cache_error": "Lỗi bộ đệm, hãy thử lại sau",
-  "no_internet_error": "Xin vui lòng kiểm tra kết nối Internet của bạn"
+  "@success": {
+    "description": "Thông báo hiển thị khi thao tác thành công."
+  },
+
+  "cancel": "hủy bỏ",
+  "@cancel": {
+    "description": "Nhãn cho hành động hủy bỏ."
+  },
+
+  "bad_request_error": "yêu cầu không hợp lệ. thử lại sau",
+  "@bad_request_error": {
+    "description": "Thông báo hiển thị khi máy chủ trả về lỗi yêu cầu không hợp lệ."
+  },
+
+  "no_content": "thành công nhưng không có nội dung",
+  "@no_content": {
+    "description": "Thông báo hiển thị khi thao tác thành công nhưng không có nội dung."
+  },
+
+  "forbidden_error": "yêu cầu bị từ chối. thử lại sau",
+  "@forbidden_error": {
+    "description": "Thông báo hiển thị khi xảy ra lỗi yêu cầu bị từ chối."
+  },
+
+  "unauthorized_error": "người dùng không được ủy quyền, thử lại sau",
+  "@unauthorized_error": {
+    "description": "Thông báo hiển thị khi người dùng không được ủy quyền."
+  },
+
+  "not_found_error": "không tìm thấy URL, thử lại sau",
+  "@not_found_error": {
+    "description": "Thông báo hiển thị khi không tìm thấy URL được yêu cầu."
+  },
+
+  "conflict_error": "xung đột, thử lại sau",
+  "@conflict_error": {
+    "description": "Thông báo hiển thị khi xảy ra xung đột."
+  },
+
+  "internal_server_error": "có lỗi xảy ra, thử lại sau",
+  "@internal_server_error": {
+    "description": "Thông báo hiển thị khi xảy ra lỗi máy chủ nội bộ."
+  },
+
+  "unknown_error": "có lỗi xảy ra, thử lại sau",
+  "@unknown_error": {
+    "description": "Thông báo hiển thị cho bất kỳ lỗi không xác định nào."
+  },
+
+  "timeout_error": "hết thời gian, thử lại sau",
+  "@timeout_error": {
+    "description": "Thông báo hiển thị khi yêu cầu hết thời gian."
+  },
+
+  "default_error": "có lỗi xảy ra, thử lại sau",
+  "@default_error": {
+    "description": "Thông báo lỗi mặc định cho các vấn đề chung."
+  },
+
+  "cache_error": "lỗi bộ nhớ đệm, thử lại sau",
+  "@cache_error": {
+    "description": "Thông báo hiển thị khi có lỗi bộ nhớ đệm."
+  },
+
+  "reload": "tải lại",
+  "@reload": {
+    "description": "Nhãn cho việc tải lại nội dung."
+  },
+
+  "selectDate": "Vui lòng chọn ngày",
+  "@selectDate": {
+    "description": "Thông báo yêu cầu người dùng chọn ngày."
+  },
+
+  "senDataSuccessfull": "Gửi dữ liệu thành công",
+  "@senDataSuccessfull": {
+    "description": "Thông báo xác nhận rằng dữ liệu đã được gửi thành công."
+  },
+
+  "profile": "Hồ sơ",
+  "@profile": {
+    "description": "Nhãn để truy cập hồ sơ của người dùng."
+  },
+  
+  "emptyPage": "Chưa có ghi chú nào được tạo! Tạo ghi chú của bạn!",
+  "@emptyPage": {
+    "description": "Nhãn cho truy cập hồ sơ của người dùng."
+  },
+
+  "createNote": "Đi tạo ghi chú",
+  "@createNote": {
+    "description": "Đi tạo ghi chú"
+  },
+
+  "contentDelete": "Bạn muốn xóa",
+  "@contentDelete": {
+    "description": "Bạn muốn xóa"
+  },
+
+  "accept": "Đồng ý",
+  "@accept": {
+    "description": "Đồng ý"
+  },
+
+  "labelDelete": "Xóa",
+  "@labelDelete": {
+    "description": "Xóa"
+  },
+
+  "unpaid": "Chưa thanh toán",
+  "@unpaid": {
+    "description": "Chưa thanh toán"
+  },
+
+  "paid": "Đã thanh toán",
+  "@paid": {
+    "description": "Đã thanh toán"
+  }
 }

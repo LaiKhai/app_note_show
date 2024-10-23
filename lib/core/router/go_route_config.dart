@@ -1,5 +1,3 @@
-import 'package:go_router/go_router.dart';
-
 import 'package:Noteshow/view/pages/create_show_detail/index.dart';
 
 import '../../main.dart';

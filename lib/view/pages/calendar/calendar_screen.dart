@@ -1,11 +1,8 @@
-import 'package:Noteshow/view/pages/create_show_detail/index.dart';
-import 'package:Noteshow/view/pages/home/home_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:intl/intl.dart';
 
-import '../../../main.dart';
-import 'index.dart';
+import '../../../index.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({
@@ -62,7 +59,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ElevatedButton(
                     onPressed: _load,
-                    child: const Text('reload'),
+                    child: Text(AppLocalizations.of(context)!.reload),
                   ),
                 ),
               ],
@@ -127,9 +124,9 @@ class CalendarScreenState extends State<CalendarScreen> {
               onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
                 if (args.value is PickerDateRange) {
                   final range =
-                      '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
+                      '${DateFormat(Constants.DAY_FORMAT).format(args.value.startDate)} -'
                       // ignore: lines_longer_than_80_chars
-                      ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
+                      ' ${DateFormat(Constants.DAY_FORMAT).format(args.value.endDate ?? args.value.startDate)}';
                   if (kDebugMode) {
                     print(">>>>>>>>>>$range");
                   }
@@ -143,7 +140,9 @@ class CalendarScreenState extends State<CalendarScreen> {
                 } else {
                   ScaffoldMessenger.of(navigatorKey.currentContext!)
                       .showSnackBar(
-                    const SnackBar(content: Text('Please select date')),
+                    SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.selectDate)),
                   );
                 }
               },

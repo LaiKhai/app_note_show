@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/gen/assets.gen.dart';
-import '../../../core/gen/colors.gen.dart';
-import '../../res/responsive/dimen.dart';
-import 'index.dart';
+import '../../../index.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -57,7 +51,7 @@ class LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ElevatedButton(
                     onPressed: _load,
-                    child: const Text('reload'),
+                    child: Text(AppLocalizations.of(context)!.reload),
                   ),
                 ),
               ],

@@ -1,16 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import 'package:Noteshow/view/widgets/expanded_long_text_widget.dart';
 
 import '../../../../domain/home_page.dart/home_page_impl.dart';
+import '../../../../index.dart';
 import '../../../widgets/dialog_widget/confirm_dialog_widget.dart';
 import '../../create_show_detail/index.dart';
-import '../index.dart';
 
 class ListEventCalendarWidget extends StatelessWidget {
   final List<EventCalendar> lstEventCalendar;
@@ -24,6 +24,7 @@ class ListEventCalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DeviceCalendarPlugin deviceCalendarPlugin = DeviceCalendarPlugin();
     return ListView.builder(
         controller: controller,
         itemCount: lstEventCalendar.length,
@@ -42,11 +43,21 @@ class ListEventCalendarWidget extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (context) => ConfirmDialog(
-                                    bodyText: "You want to delete ",
+                                    bodyText: AppLocalizations.of(context)
+                                            ?.contentDelete ??
+                                        "",
                                     specialText: lstEventCalendar[index].name!,
-                                    acceptText: 'Yes',
-                                    denyText: 'No',
-                                    onAccept: () {
+                                    acceptText:
+                                        AppLocalizations.of(context)?.accept ??
+                                            "",
+                                    denyText:
+                                        AppLocalizations.of(context)?.cancel ??
+                                            "",
+                                    onAccept: () async {
+                                      await deviceCalendarPlugin.deleteEvent(
+                                          lstEventCalendar[index].calendarId!,
+                                          lstEventCalendar[index].eventId ??
+                                              "");
                                       homePageImpl
                                           .delete(lstEventCalendar[index].id);
                                       GoRouter.of(context).pop();
@@ -61,7 +72,7 @@ class ListEventCalendarWidget extends StatelessWidget {
                         backgroundColor: const Color(0xFFFE4A49),
                         foregroundColor: Colors.white,
                         icon: Icons.delete,
-                        label: 'Delete',
+                        label: AppLocalizations.of(context)?.labelDelete ?? "",
                       ),
                     ],
                   ),
@@ -127,8 +138,8 @@ class ListEventCalendarWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(AppSize.s4),
                           child: Text(
                             lstEventCalendar[index].isPaid ?? false
-                                ? "Paid"
-                                : "UnPaid",
+                                ? AppLocalizations.of(context)?.paid ?? ""
+                                : AppLocalizations.of(context)?.unpaid ?? "",
                             style: const TextStyle(color: ColorName.white),
                           ),
                         ),
@@ -189,9 +200,9 @@ class ListEventCalendarWidget extends StatelessWidget {
                                 width: AppSize.s4,
                               ),
                               Text(
-                                  '${DateFormat('dd/MM/yyyy').format(lstEventCalendar[index].startDate ?? DateTime.now())} -'
+                                  '${DateFormat(Constants.DAY_FORMAT).format(lstEventCalendar[index].startDate ?? DateTime.now())} -'
                                   // ignore: lines_longer_than_80_chars
-                                  ' ${DateFormat.jms().format(lstEventCalendar[index].startDate ?? DateTime.now())}',
+                                  ' ${DateFormat(Constants.HOUR_FORMAT).format(lstEventCalendar[index].startDate ?? DateTime.now())} to ${DateFormat(Constants.HOUR_FORMAT).format(lstEventCalendar[index].endDate ?? DateTime.now())}',
                                   style: const TextStyle(
                                       color: ColorName.white,
                                       fontWeight: FontWeight.bold)),

@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 
 import '../../../domain/home_page.dart/home_page_impl.dart';
 import '../../../domain/services/isar_services.dart';
+import '../../../index.dart';
 import '../../../main.dart';
 import 'index.dart';
 
@@ -171,7 +172,7 @@ class HomePageState extends State<HomePage> {
                                         (DateTime value) {
                                   return DropdownMenuEntry<DateTime>(
                                       value: value,
-                                      label: DateFormat('dd/MM/yyyy')
+                                      label: DateFormat(Constants.DAY_FORMAT)
                                           .format(value));
                                 }).toList(),
                               ),
@@ -207,12 +208,13 @@ class HomePageState extends State<HomePage> {
                                         (DateTime value) {
                                   return DropdownMenuEntry<DateTime>(
                                       labelWidget: Text(
-                                        DateFormat('dd/MM/yyyy').format(value),
+                                        DateFormat(Constants.DAY_FORMAT)
+                                            .format(value),
                                         style: const TextStyle(
                                             color: ColorName.colorGrey2),
                                       ),
                                       value: value,
-                                      label: DateFormat('dd/MM/yyyy')
+                                      label: DateFormat(Constants.DAY_FORMAT)
                                           .format(value));
                                 }).toList(),
                               ),

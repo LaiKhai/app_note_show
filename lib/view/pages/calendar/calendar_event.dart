@@ -3,7 +3,6 @@ import 'dart:developer' as developer;
 
 import 'package:Noteshow/domain/services/isar_services.dart';
 import 'package:Noteshow/view/pages/create_show_detail/index.dart';
-import 'package:meta/meta.dart';
 
 import '../home/index.dart';
 import 'index.dart';

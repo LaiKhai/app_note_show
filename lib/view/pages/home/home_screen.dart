@@ -1,27 +1,18 @@
-import 'package:Noteshow/core/gen/assets.gen.dart';
-import 'package:Noteshow/domain/home_page.dart/home_page_impl.dart';
-import 'package:Noteshow/domain/services/isar_services.dart';
-import 'package:Noteshow/view/pages/create_show_detail/index.dart';
 import 'package:Noteshow/view/pages/home/pages/list_event_calender_widget.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
-import '../../../main.dart';
-import '../../widgets/empty_page.dart';
-import '../calendar/calendar_page.dart';
-import 'index.dart';
+import '../../../index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     required HomeBloc homeBloc,
     super.key,
     required this.callback,
-  }) : _homeBloc = homeBloc;
+  });
 
-  final HomeBloc _homeBloc;
   final Function(bool isVisible) callback;
 
   @override
@@ -87,7 +78,7 @@ class HomeScreenState extends State<HomeScreen>
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ElevatedButton(
                     onPressed: homePageImpl.load,
-                    child: const Text('reload'),
+                    child: Text(AppLocalizations.of(context)!.reload),
                   ),
                 ),
               ],
@@ -102,18 +93,20 @@ class HomeScreenState extends State<HomeScreen>
           }
           if (currentState is InHomeState) {
             return currentState.lstEventCalendar.isEmpty
-                ? EmptyPage(
-                    bodyText:
-                        "No notes have been created yet! Create your own note!",
-                    onPressedText: "Go to create note",
-                    onPressed: () {
-                      try {
-                        GoRouter.of(navigatorKey.currentContext!)
-                            .go(CalendarPage.routeName);
-                      } on PlatformException catch (e) {
-                        print(e);
-                      }
-                    },
+                ? Center(
+                    child: EmptyPage(
+                      bodyText: AppLocalizations.of(context)?.emptyPage ?? "",
+                      onPressedText:
+                          AppLocalizations.of(context)?.createNote ?? "",
+                      onPressed: () {
+                        try {
+                          GoRouter.of(navigatorKey.currentContext!)
+                              .go(CalendarPage.routeName);
+                        } on PlatformException catch (e) {
+                          EasyLoading.showError(e.toString());
+                        }
+                      },
+                    ),
                   )
                 : ListEventCalendarWidget(
                     controller: controller,

@@ -1,3 +1,4 @@
+import 'package:device_calendar/device_calendar.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class CreateShowDetailState extends Equatable {
@@ -17,15 +18,15 @@ class UnCreateShowDetailState extends CreateShowDetailState {
 
 /// Initialized
 class InCreateShowDetailState extends CreateShowDetailState {
-  const InCreateShowDetailState(this.hello);
+  const InCreateShowDetailState({this.calendars});
 
-  final String hello;
-
-  @override
-  String toString() => 'InCreateShowDetailState $hello';
+  final List<Calendar>? calendars;
 
   @override
-  List<Object> get props => [hello];
+  String toString() => 'InCreateShowDetailState $calendars';
+
+  @override
+  List<Object> get props => [calendars ?? []];
 }
 
 class ErrorCreateShowDetailState extends CreateShowDetailState {
