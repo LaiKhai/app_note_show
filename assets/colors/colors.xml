@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bgAppBar">#0FC2B5</color>
+    <color name="bgAppBar">#D9D9D9</color>
     <color name="bgLight">#FFE8F5E9</color>
     <color name="colorSelectRange">#AD5C00</color>
 
@@ -35,6 +35,8 @@
 
     <color name="colorGrey1">#DBD6CE</color>
     <color name="colorGrey2">#797979</color>
+    <color name="colorGrey3">#F5F7FA</color>
+    
     <color name="colorError">#e61f34</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#0C0C0C</color>

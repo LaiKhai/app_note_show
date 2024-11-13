@@ -10,5 +10,7 @@ abstract class HomePageRepo {
   @factoryMethod
   void filterDate(DateTime startDate, DateTime endDate);
   @factoryMethod
+  void searchTitle(String title);
+  @factoryMethod
   void updatePaidStatus(EventCalendar event);
 }

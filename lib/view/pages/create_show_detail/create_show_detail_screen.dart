@@ -39,6 +39,11 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
   @override
   void initState() {
     super.initState();
+    initialVariable();
+    _load();
+  }
+
+  void initialVariable() {
     if (widget.controller.selectedDates != null) {
       listSelectTime = widget.controller.selectedDates ?? [];
       listSelectTime?.sort();
@@ -71,8 +76,6 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
       endTime =
           startTime!.map((date) => date.add(const Duration(hours: 1))).toList();
     }
-
-    _load();
   }
 
   @override
@@ -120,14 +123,17 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
             ));
           }
           if (currentState is InCreateShowDetailState) {
+            if (currentState.calendars != null) {
+              calendar = currentState.calendars!.first;
+            }
             return LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 return (listSelectTime == null || listSelectTime!.isEmpty)
                     ? Center(
                         child: EmptyPage(
-                          bodyText:
-                              "The page is currently empty! You can come back.",
-                          onPressedText: "Back to Calendar",
+                          bodyText: AppLocalizations.of(context)!.pageEmpty,
+                          onPressedText:
+                              AppLocalizations.of(context)!.backToCalendar,
                           onPressed: () {
                             try {
                               GoRouter.of(navigatorKey.currentContext!).pop();
@@ -170,7 +176,8 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                         focusNode: titleFocusNode[index],
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return 'Please enter some text';
+                                            return AppLocalizations.of(context)!
+                                                .enterSomeText;
                                           }
                                           return null;
                                         },
@@ -178,7 +185,9 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                           AutofillHints.username
                                         ],
                                         decoration: InputDecoration(
-                                            labelText: 'Title',
+                                            labelText:
+                                                AppLocalizations.of(context)!
+                                                    .titleEvent,
                                             border: OutlineInputBorder(
                                                 borderSide: const BorderSide(
                                                   color: ColorName.black,
@@ -198,7 +207,8 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                         focusNode: priceFocusNode[index],
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return 'Please enter some text';
+                                            return AppLocalizations.of(context)!
+                                                .enterPrices;
                                           }
                                           return null;
                                         },
@@ -215,7 +225,9 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
 
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
-                                            labelText: 'Prices',
+                                            labelText:
+                                                AppLocalizations.of(context)!
+                                                    .pricesEvent,
                                             border: OutlineInputBorder(
                                                 borderSide: const BorderSide(
                                                   color: ColorName.black,
@@ -230,42 +242,48 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           bottom: AppSize.s16),
-                                      child: SizedBox(
+                                      child: DropdownMenu<Calendar>(
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        child: DropdownMenu<Calendar>(
-                                          initialSelection:
-                                              currentState.calendars!.first,
-                                          controller: calendarController,
-                                          requestFocusOnTap: false,
-                                          label: Text(currentState
-                                                  .calendars!.first.name ??
-                                              ""),
-                                          onSelected: (Calendar? value) {
-                                            setState(() {
-                                              calendar = value!;
-                                            });
-                                          },
-                                          dropdownMenuEntries: currentState
-                                              .calendars!
-                                              .map<DropdownMenuEntry<Calendar>>(
-                                                  (Calendar calendar) {
-                                            return DropdownMenuEntry<Calendar>(
-                                              value: calendar,
-                                              label: calendar.name ?? "",
-                                            );
-                                          }).toList(),
+                                        initialSelection:
+                                            currentState.calendars!.first,
+                                        inputDecorationTheme:
+                                            InputDecorationTheme(
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
                                         ),
+                                        controller: calendarController,
+                                        requestFocusOnTap: false,
+                                        label: Text(
+                                            AppLocalizations.of(context)!
+                                                .typeEvent),
+                                        onSelected: (Calendar? value) {
+                                          setState(() {
+                                            calendar = value ??
+                                                currentState.calendars!.first;
+                                          });
+                                        },
+                                        dropdownMenuEntries: currentState
+                                            .calendars!
+                                            .map<DropdownMenuEntry<Calendar>>(
+                                                (Calendar calendar) {
+                                          return DropdownMenuEntry<Calendar>(
+                                            value: calendar,
+                                            label: calendar.name ?? "",
+                                          );
+                                        }).toList(),
                                       ),
                                     ),
 
                                     //TODO: date time
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(bottom: AppSize.s8),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: AppSize.s8),
                                       child: Text(
-                                        "Start Time",
-                                        style: TextStyle(
+                                        AppLocalizations.of(context)!
+                                            .startTimeEvent,
+                                        style: const TextStyle(
                                             color: ColorName.black,
                                             fontWeight: FontWeight.w700),
                                       ),
@@ -340,12 +358,13 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                       ),
                                     ),
                                     //TODO: end date time
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(bottom: AppSize.s8),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: AppSize.s8),
                                       child: Text(
-                                        "End Time",
-                                        style: TextStyle(
+                                        AppLocalizations.of(context)!
+                                            .endTimeEvent,
+                                        style: const TextStyle(
                                             color: ColorName.black,
                                             fontWeight: FontWeight.w700),
                                       ),
@@ -423,6 +442,17 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                     //TODO: decription
                                     Padding(
                                       padding: const EdgeInsets.only(
+                                          bottom: AppSize.s8),
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .decriptionEvent,
+                                        style: const TextStyle(
+                                            color: ColorName.black,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
                                           bottom: AppSize.s16),
                                       child: TextFormField(
                                         controller: decriptionController[index],
@@ -445,58 +475,75 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                                     //TODO: button submit
                                     Row(
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 16),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    ColorName.bgAppBar,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8))),
-                                            onPressed: () async {
-                                              await _createEventCalendar(
-                                                  index, calendar);
-                                            },
-                                            child: const Text(
-                                              'Create Event',
-                                              style: TextStyle(
-                                                  color: ColorName.white),
+                                        Flexible(
+                                          flex: 6,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 16),
+                                            child: SizedBox(
+                                              width: double.infinity,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorName
+                                                        .bgAppBar,
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    AppSize
+                                                                        .s8))),
+                                                onPressed: () async {
+                                                  await _createEventCalendar(
+                                                      index, calendar);
+                                                },
+                                                child: Text(
+                                                  AppLocalizations.of(context)!
+                                                      .createEvent,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color:
+                                                          ColorName.colorGrey2),
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
                                         const SizedBox(
-                                          width: AppSize.s10,
+                                          width: 10,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 16),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    ColorName.bgTagUnPaid,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8))),
-                                            onPressed: () async {
-                                              setState(() {
-                                                listSelectTime?.removeAt(index);
-                                              });
-                                              if (listSelectTime!.isEmpty) {
-                                                GoRouter.of(navigatorKey
-                                                        .currentContext!)
-                                                    .pushReplacement(
-                                                        HomePage.routeName);
-                                              }
-                                            },
-                                            child: const Text(
-                                              'Delete Event',
-                                              style: TextStyle(
-                                                  color: ColorName.white),
-                                            ),
+                                        Flexible(
+                                          flex: 2,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 16),
+                                            child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorName
+                                                        .bgTagUnPaid,
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    AppSize
+                                                                        .s8))),
+                                                onPressed: () async {
+                                                  setState(() {
+                                                    listSelectTime
+                                                        ?.removeAt(index);
+                                                  });
+                                                  if (listSelectTime!.isEmpty) {
+                                                    GoRouter.of(navigatorKey
+                                                            .currentContext!)
+                                                        .pushReplacement(
+                                                            HomePage.routeName);
+                                                  }
+                                                },
+                                                child: const Center(
+                                                    child: Icon(
+                                                  Icons.delete,
+                                                  color: ColorName.white,
+                                                ))),
                                           ),
                                         ),
                                       ],
@@ -600,9 +647,9 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
           endTime![index] = startTime![index].add(const Duration(hours: 1));
           // Show error message if the selected time is earlier than the current time today
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                  'Selected time must be later than the current time if today.'),
+            SnackBar(
+              content:
+                  Text(AppLocalizations.of(context)!.selectDayLaterCurrentDay),
             ),
           );
           return; // Exit the function early
@@ -621,8 +668,9 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
           if (selectedDate.isBefore(startTime![index])) {
             endTime![index] = startTime![index].add(const Duration(hours: 1));
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('End time cannot be earlier than start time'),
+              SnackBar(
+                content:
+                    Text(AppLocalizations.of(context)!.endTimeEarlyStartTime),
               ),
             );
           } else {

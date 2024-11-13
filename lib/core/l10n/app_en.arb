@@ -1,133 +1,140 @@
 {
+  "@@locale": "en",
   "app_name": "Error handler",
-  "@app_name": {
-    "description": "The name of the application."
-  },
+  "@app_name": {},
 
   "no_route_found": "No Route Found",
-  "@no_route_found": {
-    "description": "Message displayed when a route is not found."
-  },
+  "@no_route_found": {},
 
   "success": "success",
-  "@success": {
-    "description": "Message displayed when an operation is successful."
-  },
+  "@success": {},
 
   "cancel": "cancel",
-  "@cancel": {
-    "description": "Label for canceling an action."
-  },
+  "@cancel": {},
+
+  "next": "next",
+  "@next": {},
 
   "bad_request_error": "bad request. try again later",
-  "@bad_request_error": {
-    "description": "Message displayed when the server returns a bad request error."
-  },
+  "@bad_request_error": {},
 
   "no_content": "success with not content",
-  "@no_content": {
-    "description": "Message displayed when the operation succeeds but there is no content."
-  },
+  "@no_content": {},
 
   "forbidden_error": "forbidden request. try again later",
-  "@forbidden_error": {
-    "description": "Message displayed when a forbidden request error occurs."
-  },
+  "@forbidden_error": {},
 
   "unauthorized_error": "user unauthorized, try again later",
-  "@unauthorized_error": {
-    "description": "Message displayed when the user is unauthorized."
-  },
+  "@unauthorized_error": {},
 
   "not_found_error": "url not found, try again later",
-  "@not_found_error": {
-    "description": "Message displayed when the requested URL is not found."
-  },
+  "@not_found_error": {},
 
   "conflict_error": "conflict found, try again later",
-  "@conflict_error": {
-    "description": "Message displayed when a conflict occurs."
-  },
+  "@conflict_error": {},
 
   "internal_server_error": "some thing went wrong, try again later",
-  "@internal_server_error": {
-    "description": "Message displayed when an internal server error occurs."
-  },
+  "@internal_server_error": {},
 
   "unknown_error": "some thing went wrong, try again later",
-  "@unknown_error": {
-
-    "description": "Message displayed for any unknown error."
-  },
+  "@unknown_error": {},
 
   "timeout_error": "time out, try again later",
-  "@timeout_error": {
-    "description": "Message displayed when a request times out."
-  },
+  "@timeout_error": {},
 
   "default_error": "some thing went wrong, try again later",
-  "@default_error": {
-    "description": "Default error message for general issues."
-  },
+  "@default_error": {},
 
   "cache_error": "cache error, try again later",
-  "@cache_error": {
-    "description": "Message displayed when there is a cache error."
-  },
+  "@cache_error": {},
 
   "reload": "reload",
-  "@reload": {
-    "description": "Label for reloading content."
-  },
+  "@reload": {},
 
   "selectDate": "Please select date",
-  "@selectDate": {
-    "description": "Message prompting the user to select a date."
-  },
+  "@selectDate": {},
 
   "senDataSuccessfull": "Send data successfully",
-  "@senDataSuccessfull": {
-    "description": "Message confirming that data was sent successfully."
-  },
+  "@senDataSuccessfull": {},
 
   "profile": "Profile",
-  "@profile": {
-    "description": "Label for accessing the user's profile."
-  },
+  "@profile": {},
   
   "emptyPage": "No notes have been created yet! Create your own note!",
-  "@emptyPage": {
-    "description": "Label for accessing the user's profile."
-  },
+  "@emptyPage": {},
 
   "createNote": "Go to create note",
-  "@createNote": {
-    "description": "Go to create note"
-  },
+  "@createNote": {},
 
 
   "contentDelete": "You want to delete",
-  "@contentDelete": {
-    "description": "You want to delete"
-  },
+  "@contentDelete": {},
 
   "accept": "Yes",
-  "@accept": {
-    "description": "Yes"
-  },
+  "@accept": {},
 
   "labelDelete": "Delete",
-  "@labelDelete": {
-    "description": "Delete"
-  },
+  "@labelDelete": {},
   "unpaid": "UnPaid",
-  "@unpaid": {
-    "description": "UnPaid"
-  },
+  "@unpaid": {},
   "paid": "Paid",
-  "@paid": {
-    "description": "Paid"
-  }
+  "@paid": {},
 
+  "createEvent": "Create Event",
+  "@createEvent": {},
+
+  "deleteEvent": "Delete Event",
+  "@deleteEvent": {
+    "description": "Delete Event"
+  },
+
+  "selectDayLaterCurrentDay": "Selected time must be later than the current time if today.",
+  "@selectDayLaterCurrentDay": {}
+  ,
+  "endTimeEarlyStartTime": "End time cannot be earlier than start time",
+  "@endTimeEarlyStartTime": {},
+
+  "pageEmpty": "The page is currently empty! You can come back.",
+  "@pageEmpty": {},
+
+  "backToCalendar": "Back to Calendar",
+  "@backToCalendar": {},
+
+  "enterSomeText": "Please enter some text",
+  "@enterSomeText": {},
+
+  "titleEvent": "Title",
+  "@titleEvent": {},
+
+  "enterPrices": "Please enter the amount of this event",
+  "@enterPrices": {},
+
+  "pricesEvent": "Prices",
+  "@pricesEvent": {},
   
+  "typeEvent": "Event Type",
+  "@typeEvent": {},
+
+  "startTimeEvent": "Start Time",
+  "@startTimeEvent": {},
+
+  "endTimeEvent": "End Time",
+  "@endTimeEvent": {},
+
+  "decriptionEvent": "Decription",
+  "@decriptionEvent": {},
+
+  "selectedItems": "Selected Items ({selectedFlag})",
+  "@selectedItems": {
+    "placeholders": {
+      "selectedFlag":{}
+    }
+  },
+
+  "deleted": "Deleted",
+  "@deleted": {},
+
+  "payOrUnPay": "Pay/UnPay",
+  "@payOrUnPay": {}
+
 }

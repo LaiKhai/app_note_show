@@ -32,12 +32,10 @@ class MainApp extends StatelessWidget {
           theme: ThemeData(
               colorScheme: const ColorScheme.light(
                 primary: ColorName.bgAppBar,
-                secondary: ColorName.bgLight,
               ),
               fontFamily: FontFamily.dMSans,
               appBarTheme:
                   const AppBarTheme(backgroundColor: ColorName.bgAppBar),
-              scaffoldBackgroundColor: ColorName.bgLight,
               textSelectionTheme:
                   const TextSelectionThemeData(cursorColor: Colors.red)),
         );

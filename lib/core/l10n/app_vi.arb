@@ -1,131 +1,140 @@
 {
+  "@@locale": "vi",
   "app_name": "Trình xử lý lỗi",
-  "@app_name": {
-    "description": "Tên của ứng dụng."
-  },
+  "@app_name": {},
 
   "no_route_found": "Không tìm thấy đường dẫn",
-  "@no_route_found": {
-    "description": "Thông báo hiển thị khi không tìm thấy đường dẫn."
-  },
+  "@no_route_found": {},
 
   "success": "thành công",
-  "@success": {
-    "description": "Thông báo hiển thị khi thao tác thành công."
-  },
+  "@success": {},
 
-  "cancel": "hủy bỏ",
-  "@cancel": {
-    "description": "Nhãn cho hành động hủy bỏ."
-  },
+  "cancel": "hủy",
+  "@cancel": {},
+
+  "next": "tiếp theo",
+  "@next": {},
 
   "bad_request_error": "yêu cầu không hợp lệ. thử lại sau",
-  "@bad_request_error": {
-    "description": "Thông báo hiển thị khi máy chủ trả về lỗi yêu cầu không hợp lệ."
-  },
+  "@bad_request_error": {},
 
   "no_content": "thành công nhưng không có nội dung",
-  "@no_content": {
-    "description": "Thông báo hiển thị khi thao tác thành công nhưng không có nội dung."
-  },
+  "@no_content": {},
 
-  "forbidden_error": "yêu cầu bị từ chối. thử lại sau",
-  "@forbidden_error": {
-    "description": "Thông báo hiển thị khi xảy ra lỗi yêu cầu bị từ chối."
-  },
+  "forbidden_error": "yêu cầu bị cấm. thử lại sau",
+  "@forbidden_error": {},
 
-  "unauthorized_error": "người dùng không được ủy quyền, thử lại sau",
-  "@unauthorized_error": {
-    "description": "Thông báo hiển thị khi người dùng không được ủy quyền."
-  },
+  "unauthorized_error": "người dùng không được phép, thử lại sau",
+  "@unauthorized_error": {},
 
-  "not_found_error": "không tìm thấy URL, thử lại sau",
-  "@not_found_error": {
-    "description": "Thông báo hiển thị khi không tìm thấy URL được yêu cầu."
-  },
+  "not_found_error": "không tìm thấy url, thử lại sau",
+  "@not_found_error": {},
 
-  "conflict_error": "xung đột, thử lại sau",
-  "@conflict_error": {
-    "description": "Thông báo hiển thị khi xảy ra xung đột."
-  },
+  "conflict_error": "xung đột được phát hiện, thử lại sau",
+  "@conflict_error": {},
 
-  "internal_server_error": "có lỗi xảy ra, thử lại sau",
-  "@internal_server_error": {
-    "description": "Thông báo hiển thị khi xảy ra lỗi máy chủ nội bộ."
-  },
+  "internal_server_error": "đã xảy ra lỗi, thử lại sau",
+  "@internal_server_error": {},
 
-  "unknown_error": "có lỗi xảy ra, thử lại sau",
-  "@unknown_error": {
-    "description": "Thông báo hiển thị cho bất kỳ lỗi không xác định nào."
-  },
+  "unknown_error": "đã xảy ra lỗi, thử lại sau",
+  "@unknown_error": {},
 
   "timeout_error": "hết thời gian, thử lại sau",
-  "@timeout_error": {
-    "description": "Thông báo hiển thị khi yêu cầu hết thời gian."
-  },
+  "@timeout_error": {},
 
-  "default_error": "có lỗi xảy ra, thử lại sau",
-  "@default_error": {
-    "description": "Thông báo lỗi mặc định cho các vấn đề chung."
-  },
+  "default_error": "đã xảy ra lỗi, thử lại sau",
+  "@default_error": {},
 
   "cache_error": "lỗi bộ nhớ đệm, thử lại sau",
-  "@cache_error": {
-    "description": "Thông báo hiển thị khi có lỗi bộ nhớ đệm."
-  },
+  "@cache_error": {},
 
   "reload": "tải lại",
-  "@reload": {
-    "description": "Nhãn cho việc tải lại nội dung."
-  },
+  "@reload": {},
 
   "selectDate": "Vui lòng chọn ngày",
-  "@selectDate": {
-    "description": "Thông báo yêu cầu người dùng chọn ngày."
-  },
+  "@selectDate": {},
 
   "senDataSuccessfull": "Gửi dữ liệu thành công",
-  "@senDataSuccessfull": {
-    "description": "Thông báo xác nhận rằng dữ liệu đã được gửi thành công."
-  },
+  "@senDataSuccessfull": {},
 
   "profile": "Hồ sơ",
-  "@profile": {
-    "description": "Nhãn để truy cập hồ sơ của người dùng."
-  },
+  "@profile": {},
   
   "emptyPage": "Chưa có ghi chú nào được tạo! Tạo ghi chú của bạn!",
-  "@emptyPage": {
-    "description": "Nhãn cho truy cập hồ sơ của người dùng."
-  },
+  "@emptyPage": {},
 
-  "createNote": "Đi tạo ghi chú",
-  "@createNote": {
-    "description": "Đi tạo ghi chú"
-  },
+  "createNote": "Đi đến tạo ghi chú",
+  "@createNote": {},
 
-  "contentDelete": "Bạn muốn xóa",
-  "@contentDelete": {
-    "description": "Bạn muốn xóa"
-  },
+  "contentDelete": "Bạn có muốn xóa",
+  "@contentDelete": {},
 
-  "accept": "Đồng ý",
-  "@accept": {
-    "description": "Đồng ý"
-  },
+  "accept": "Có",
+  "@accept": {},
 
   "labelDelete": "Xóa",
-  "@labelDelete": {
-    "description": "Xóa"
-  },
+  "@labelDelete": {},
 
   "unpaid": "Chưa thanh toán",
-  "@unpaid": {
-    "description": "Chưa thanh toán"
-  },
+  "@unpaid": {},
 
   "paid": "Đã thanh toán",
-  "@paid": {
-    "description": "Đã thanh toán"
-  }
+  "@paid": {},
+
+  "createEvent": "Tạo sự kiện",
+  "@createEvent": {},
+
+  "deleteEvent": "Xóa sự kiện",
+  "@deleteEvent": {
+    "description": "Xóa sự kiện"
+  },
+
+  "selectDayLaterCurrentDay": "Thời gian được chọn phải sau thời gian hiện tại nếu là hôm nay.",
+  "@selectDayLaterCurrentDay": {},
+
+  "endTimeEarlyStartTime": "Thời gian kết thúc không thể sớm hơn thời gian bắt đầu",
+  "@endTimeEarlyStartTime": {},
+
+  "pageEmpty": "Trang hiện đang trống! Bạn có thể quay lại.",
+  "@pageEmpty": {},
+
+  "backToCalendar": "Quay lại lịch",
+  "@backToCalendar": {},
+
+  "enterSomeText": "Vui lòng nhập một số nội dung",
+  "@enterSomeText": {},
+
+  "titleEvent": "Tiêu đề",
+  "@titleEvent": {},
+
+  "enterPrices": "Vui lòng nhập số tiền cho sự kiện này",
+  "@enterPrices": {},
+
+  "pricesEvent": "Giá",
+  "@pricesEvent": {},
+
+  "typeEvent": "Loại sự kiện",
+  "@typeEvent": {},
+
+  "startTimeEvent": "Thời gian bắt đầu",
+  "@startTimeEvent": {},
+
+  "endTimeEvent": "Thời gian kết thúc",
+  "@endTimeEvent": {},
+
+  "decriptionEvent": "Mô tả",
+  "@decriptionEvent": {},
+
+  "selectedItems": "Các mục đã chọn ({selectedFlag})",
+  "@selectedItems": {
+    "placeholders": {
+      "selectedFlag": {}
+    }
+  },
+
+  "deleted": "Đã xóa",
+  "@deleted": {},
+
+  "payOrUnPay": "Thanh toán/Chưa thanh toán",
+  "@payOrUnPay": {}
 }

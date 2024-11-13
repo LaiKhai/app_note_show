@@ -1,131 +1,122 @@
 {
+  "@@locale": "zh",
   "app_name": "错误处理器",
-  "@app_name": {
-    "description": "应用程序的名称。"
-  },
+  "@app_name": {},
 
-  "no_route_found": "未找到路由",
-  "@no_route_found": {
-    "description": "当找不到路由时显示的消息。"
-  },
+  "no_route_found": "未找到路径",
+  "@no_route_found": {},
 
   "success": "成功",
-  "@success": {
-    "description": "操作成功时显示的消息。"
-  },
+  "@success": {},
 
   "cancel": "取消",
-  "@cancel": {
-    "description": "取消操作的标签。"
-  },
+  "@cancel": {},
 
-  "bad_request_error": "请求错误，请稍后再试",
-  "@bad_request_error": {
-    "description": "服务器返回错误请求时显示的消息。"
-  },
+  "bad_request_error": "错误请求，请稍后再试",
+  "@bad_request_error": {},
 
-  "no_content": "成功，但无内容",
-  "@no_content": {
-    "description": "操作成功但没有内容时显示的消息。"
-  },
+  "no_content": "成功但无内容",
+  "@no_content": {},
 
   "forbidden_error": "请求被禁止，请稍后再试",
-  "@forbidden_error": {
-    "description": "发生禁止请求错误时显示的消息。"
-  },
+  "@forbidden_error": {},
 
-  "unauthorized_error": "用户未经授权，请稍后再试",
-  "@unauthorized_error": {
-    "description": "用户未经授权时显示的消息。"
-  },
+  "unauthorized_error": "用户未授权，请稍后再试",
+  "@unauthorized_error": {},
 
-  "not_found_error": "未找到 URL，请稍后再试",
-  "@not_found_error": {
-    "description": "请求的 URL 未找到时显示的消息。"
-  },
+  "not_found_error": "未找到网址，请稍后再试",
+  "@not_found_error": {},
 
   "conflict_error": "发现冲突，请稍后再试",
-  "@conflict_error": {
-    "description": "发生冲突时显示的消息。"
-  },
+  "@conflict_error": {},
 
   "internal_server_error": "发生错误，请稍后再试",
-  "@internal_server_error": {
-    "description": "发生服务器内部错误时显示的消息。"
-  },
+  "@internal_server_error": {},
 
   "unknown_error": "发生未知错误，请稍后再试",
-  "@unknown_error": {
-    "description": "任何未知错误时显示的消息。"
-  },
+  "@unknown_error": {},
 
   "timeout_error": "请求超时，请稍后再试",
-  "@timeout_error": {
-    "description": "请求超时时显示的消息。"
-  },
+  "@timeout_error": {},
 
   "default_error": "发生错误，请稍后再试",
-  "@default_error": {
-    "description": "常规问题的默认错误消息。"
-  },
+  "@default_error": {},
 
   "cache_error": "缓存错误，请稍后再试",
-  "@cache_error": {
-    "description": "发生缓存错误时显示的消息。"
-  },
+  "@cache_error": {},
 
   "reload": "重新加载",
-  "@reload": {
-    "description": "重新加载内容的标签。"
-  },
+  "@reload": {},
 
   "selectDate": "请选择日期",
-  "@selectDate": {
-    "description": "提示用户选择日期的消息。"
-  },
+  "@selectDate": {},
 
   "senDataSuccessfull": "数据发送成功",
-  "@senDataSuccessfull": {
-    "description": "确认数据成功发送的消息。"
-  },
+  "@senDataSuccessfull": {},
 
   "profile": "个人资料",
-  "@profile": {
-    "description": "访问用户个人资料的标签。"
-  },
+  "@profile": {},
   
-  "emptyPage": "还没有创建笔记！创建你自己的笔记！",
-  "@emptyPage": {
-    "description": "提示用户创建笔记的消息。"
-  },
+  "emptyPage": "还没有创建笔记！创建您自己的笔记！",
+  "@emptyPage": {},
 
-  "createNote": "去创建笔记",
-  "@createNote": {
-    "description": "去创建笔记"
-  },
+  "createNote": "前往创建笔记",
+  "@createNote": {},
 
-  "contentDelete": "你想删除",
-  "@contentDelete": {
-    "description": "你想删除"
-  },
+  "contentDelete": "您要删除",
+  "@contentDelete": {},
 
   "accept": "是",
-  "@accept": {
-    "description": "是"
-  },
+  "@accept": {},
 
   "labelDelete": "删除",
-  "@labelDelete": {
-    "description": "删除"
-  },
+  "@labelDelete": {},
 
   "unpaid": "未支付",
-  "@unpaid": {
-    "description": "未支付"
-  },
+  "@unpaid": {},
 
   "paid": "已支付",
-  "@paid": {
-    "description": "已支付"
-  }
+  "@paid": {},
+
+  "createEvent": "创建活动",
+  "@createEvent": {},
+
+  "deleteEvent": "删除活动",
+  "@deleteEvent": {},
+
+  "selectDayLaterCurrentDay": "选择的时间必须晚于当前时间（如果是今天）。",
+  "@selectDayLaterCurrentDay": {},
+
+  "endTimeEarlyStartTime": "结束时间不能早于开始时间",
+  "@endTimeEarlyStartTime": {},
+
+  "pageEmpty": "当前页面为空！您可以返回。",
+  "@pageEmpty": {},
+
+  "backToCalendar": "返回日历",
+  "@backToCalendar": {},
+
+  "enterSomeText": "请输入一些文字",
+  "@enterSomeText": {},
+
+  "titleEvent": "标题",
+  "@titleEvent": {},
+
+  "enterPrices": "请输入此活动的金额",
+  "@enterPrices": {},
+
+  "pricesEvent": "价格",
+  "@pricesEvent": {},
+  
+  "typeEvent": "活动类型",
+  "@typeEvent": {},
+
+  "startTimeEvent": "开始时间",
+  "@startTimeEvent": {},
+
+  "endTimeEvent": "结束时间",
+  "@endTimeEvent": {},
+
+  "decriptionEvent": "描述",
+  "@decriptionEvent": {}
 }

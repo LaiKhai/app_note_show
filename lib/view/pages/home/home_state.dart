@@ -45,6 +45,18 @@ class FilterHomeState extends HomeState {
   List<Object> get props => [lstEventCalendar, mergedList];
 }
 
+class SearchTitleHomeState extends HomeState {
+  const SearchTitleHomeState(this.lstEventCalendar);
+
+  final List<EventCalendar> lstEventCalendar;
+
+  @override
+  String toString() => 'SearchTitleHomeState $lstEventCalendar';
+
+  @override
+  List<Object> get props => [lstEventCalendar];
+}
+
 class ErrorHomeState extends HomeState {
   const ErrorHomeState(this.errorMessage);
 

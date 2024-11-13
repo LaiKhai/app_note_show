@@ -41,6 +41,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/app_icon.svg
   SvgGenImage get appIcon => const SvgGenImage('assets/images/app_icon.svg');
 
+  /// File path: assets/images/app_lauch_icon.svg
+  SvgGenImage get appLauchIcon =>
+      const SvgGenImage('assets/images/app_lauch_icon.svg');
+
   /// File path: assets/images/empty_avatar.jpg
   AssetGenImage get emptyAvatar =>
       const AssetGenImage('assets/images/empty_avatar.jpg');
@@ -58,7 +62,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values =>
-      [appIcon, emptyAvatar, emptyPage, loading, loginIcon];
+      [appIcon, appLauchIcon, emptyAvatar, emptyPage, loading, loginIcon];
 }
 
 class Assets {

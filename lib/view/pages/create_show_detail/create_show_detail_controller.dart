@@ -7,6 +7,7 @@ import '../../../index.dart';
 @LazySingleton()
 class CreateShowDetailController {
   final DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
+
   Future<List<Calendar>> retrieveCalendars() async {
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();

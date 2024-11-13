@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
+import 'package:intl/intl.dart';
+
 import '../../../domain/services/isar_services.dart';
 import '../create_show_detail/index.dart';
 import 'index.dart';
@@ -94,6 +96,25 @@ class FilterDateTimeDataEvent extends HomeEvent {
       final lstEventCalendar = await isarServices.getAllData();
       List<DateTime> mergedList = groupDateTime(lstEventCalendar);
       yield FilterHomeState(lstfilterCalendar, mergedList);
+    } catch (_, stackTrace) {
+      developer.log('$_',
+          name: 'LoadHomeEvent', error: _, stackTrace: stackTrace);
+      yield ErrorHomeState(_.toString());
+    }
+  }
+}
+
+class SearchDataEvent extends HomeEvent {
+  final IsarServices isarServices = di.get();
+  final String title;
+  SearchDataEvent(this.title);
+  @override
+  Stream<HomeState> applyAsync(
+      {HomeState? currentState, HomeBloc? bloc}) async* {
+    try {
+      yield const UnHomeState();
+      final lstfilterCalendar = await isarServices.searchTitleEvent(title);
+      yield SearchTitleHomeState(lstfilterCalendar);
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadHomeEvent', error: _, stackTrace: stackTrace);

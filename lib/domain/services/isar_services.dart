@@ -39,14 +39,6 @@ class IsarServices implements IsarRepo {
   @override
   Future filterDateTime(startDate, endDate) async {
     final isar = await db;
-    // //Use the Isar query API to filter users based on specific criteria and return the first matching result.
-    // final favorites = isar.eventCalendars
-    //     .filter()
-    //     // .startDateEqualTo(startDate).
-    //     .startDateBetween(startDate, endDate)
-    //     .and()
-    //     .endDateBetween(startDate, endDate)
-    //     .findAllSync();
 
     final preliminaryResults = isar.eventCalendars
         .filter()
@@ -55,13 +47,7 @@ class IsarServices implements IsarRepo {
         .endDateBetween(startDate, endDate)
         .findAllSync();
 
-    final filteredResults = preliminaryResults.where((event) {
-      return (event.startDate!.isAfter(startDate) ||
-              event.startDate!.isAtSameMomentAs(startDate)) &&
-          (event.endDate!.isBefore(endDate) ||
-              event.endDate!.isAtSameMomentAs(endDate));
-    }).toList();
-    return filteredResults;
+    return preliminaryResults;
   }
 
   @override
@@ -93,5 +79,24 @@ class IsarServices implements IsarRepo {
       //Perform a write transaction to update the user in the database.
       isar.eventCalendars.putSync(object);
     });
+  }
+
+  @override
+  Future searchTitleEvent(String title) async {
+    final isar = await db;
+
+    final searchResult =
+        isar.eventCalendars.filter().nameContains(title).findAllSync();
+    return searchResult;
+  }
+
+  @override
+  Future<List<EventCalendar>> countTotal() async {
+    final isar = await db;
+
+    final countTotalAmount =
+        isar.eventCalendars.filter().isPaidEqualTo(true).findAllSync();
+
+    return countTotalAmount;
   }
 }

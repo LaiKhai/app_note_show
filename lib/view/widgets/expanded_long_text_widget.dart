@@ -39,7 +39,7 @@ class _ExpandedLongTextWidgetState extends State<ExpandedLongTextWidget> {
               ? Text(
                   widget.text,
                   style: const TextStyle(
-                    color: ColorName.white,
+                    color: ColorName.colorGrey2,
                     fontSize: AppSize.s14,
                   ),
                 )
@@ -49,7 +49,7 @@ class _ExpandedLongTextWidgetState extends State<ExpandedLongTextWidget> {
                     Text(
                       flag ? firstHaft : widget.text,
                       style: const TextStyle(
-                        color: ColorName.white,
+                        color: ColorName.colorGrey2,
                         fontSize: AppSize.s14,
                       ),
                     )

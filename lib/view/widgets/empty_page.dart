@@ -43,7 +43,7 @@ class EmptyPage extends StatelessWidget {
               ),
               child: Text(
                 onPressedText,
-                style: const TextStyle(color: ColorName.white),
+                style: const TextStyle(color: ColorName.colorGrey2),
               ),
             ),
           ),

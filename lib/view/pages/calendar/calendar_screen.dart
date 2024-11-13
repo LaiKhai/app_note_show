@@ -71,10 +71,10 @@ class CalendarScreenState extends State<CalendarScreen> {
               controller: _controller,
               initialSelectedRange:
                   PickerDateRange(DateTime.now(), DateTime.now()),
-              backgroundColor: ColorName.bgLight,
+              backgroundColor: ColorName.bgAppBar,
               selectionMode: DateRangePickerSelectionMode.multiple,
               selectionTextStyle: const TextStyle(color: Colors.white),
-              selectionColor: ColorName.bgAppBar,
+              selectionColor: ColorName.colorGrey2,
               startRangeSelectionColor: ColorName.bgAppBar,
               rangeSelectionColor: ColorName.colorSelectRange,
               endRangeSelectionColor: ColorName.bgAppBar,
@@ -88,19 +88,19 @@ class CalendarScreenState extends State<CalendarScreen> {
                   blackoutDateTextStyle: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
-                      color: ColorName.white),
+                      color: ColorName.colorGrey2),
                   blackoutDatesDecoration: BoxDecoration(
                       color: ColorName.colorGrey1, shape: BoxShape.circle),
                   todayTextStyle: TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w800,
                       fontSize: 12,
-                      color: ColorName.colorSelectRange)),
+                      color: ColorName.black)),
               yearCellStyle: const DateRangePickerYearCellStyle(
                   todayTextStyle: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: ColorName.colorSelectRange)),
-              todayHighlightColor: ColorName.colorSelectRange,
+              todayHighlightColor: ColorName.colorGrey2,
               headerStyle: const DateRangePickerHeaderStyle(
                   backgroundColor: ColorName.bgAppBar,
                   textAlign: TextAlign.center,
@@ -108,19 +108,12 @@ class CalendarScreenState extends State<CalendarScreen> {
                     fontStyle: FontStyle.normal,
                     fontSize: 25,
                     letterSpacing: 5,
-                    color: ColorName.white,
+                    color: ColorName.black,
                   )),
-
               rangeTextStyle:
                   const TextStyle(color: Colors.white, fontSize: AppSize.s16),
               view: DateRangePickerView.month,
               enablePastDates: false,
-              // selectableDayPredicate: (date) {
-              //   if (date.day < DateTime.now().day) {
-              //     return false;
-              //   }
-              //   return true;
-              // },
               onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
                 if (args.value is PickerDateRange) {
                   final range =
@@ -150,6 +143,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                 GoRouter.of(context).pushReplacement(HomePage.routeName);
               },
               confirmText: "NEXT",
+              cancelText: AppLocalizations.of(context)!.cancel.toUpperCase(),
               showActionButtons: true,
             );
           }
