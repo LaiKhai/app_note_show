@@ -121,7 +121,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                       // ignore: lines_longer_than_80_chars
                       ' ${DateFormat(Constants.DAY_FORMAT).format(args.value.endDate ?? args.value.startDate)}';
                   if (kDebugMode) {
-                    print(">>>>>>>>>>$range");
+                    debugPrint(">>>>>>>>>>$range");
                   }
                 }
               },

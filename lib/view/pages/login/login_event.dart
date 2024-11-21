@@ -14,7 +14,7 @@ class UnLoginEvent extends LoginEvent {
   @override
   Stream<LoginState> applyAsync(
       {LoginState? currentState, LoginBloc? bloc}) async* {
-    yield UnLoginState();
+    yield const UnLoginState();
   }
 }
 
@@ -23,9 +23,9 @@ class LoadLoginEvent extends LoginEvent {
   Stream<LoginState> applyAsync(
       {LoginState? currentState, LoginBloc? bloc}) async* {
     try {
-      yield UnLoginState();
+      yield const UnLoginState();
       await Future.delayed(const Duration(seconds: 1));
-      yield InLoginState('Hello world');
+      yield const InLoginState('Hello world');
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadLoginEvent', error: _, stackTrace: stackTrace);

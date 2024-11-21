@@ -136,5 +136,21 @@
   "@deleted": {},
 
   "payOrUnPay": "Thanh toán/Chưa thanh toán",
-  "@payOrUnPay": {}
+  "@payOrUnPay": {},
+
+
+  "totalShowPerMonth": "Tổng số buổi diễn/tháng",
+  "@totalShowPerMonth": {},
+
+  "totalMoneyPerMonth": "Tổng số tiền/tháng",
+  "@totalMoneyPerMonth": {},
+
+  "searchText": "Tìm kiếm",
+  "@searchText": {},
+
+  "all": "Tất cả",
+  "@all": {},
+
+  "overdue": "Buổi diễn đã quá hạn",
+  "@overdue": {}
 }

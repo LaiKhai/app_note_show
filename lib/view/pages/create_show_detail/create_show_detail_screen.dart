@@ -1,6 +1,3 @@
-import 'package:device_calendar/device_calendar.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import '../../../index.dart';
 
 class CreateShowDetailScreen extends StatefulWidget {
@@ -20,8 +17,8 @@ class CreateShowDetailScreen extends StatefulWidget {
 
 class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
   final EventCalendarImpl eventCalendarImpl = di.get();
-
-  late final List<GlobalKey<FormState>> _formKeys;
+  final CreateShowDetailController createShowDetailController = di.get();
+  late final List<GlobalKey<FormState>> formKeys;
   late final List<FocusNode> titleFocusNode;
   late final List<FocusNode> priceFocusNode;
   late final List<FocusNode> decriptionFocusNode;
@@ -40,14 +37,14 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
   void initState() {
     super.initState();
     initialVariable();
-    _load();
+    createShowDetailController.load(widget._createShowDetailBloc);
   }
 
   void initialVariable() {
     if (widget.controller.selectedDates != null) {
       listSelectTime = widget.controller.selectedDates ?? [];
       listSelectTime?.sort();
-      _formKeys = List.generate(
+      formKeys = List.generate(
           listSelectTime!.length, (index) => GlobalKey<FormState>());
       titleFocusNode =
           List.generate(listSelectTime!.length, (index) => FocusNode());
@@ -115,7 +112,8 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ElevatedButton(
-                    onPressed: _load,
+                    onPressed: () => createShowDetailController
+                        .load(widget._createShowDetailBloc),
                     child: Text(AppLocalizations.of(context)!.reload),
                   ),
                 ),
@@ -145,414 +143,57 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
                       )
                     : ListView.builder(
                         itemCount: listSelectTime!.length,
-                        itemBuilder: (context, index) => Card(
-                          key: ValueKey(listSelectTime![index]),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (titleFocusNode[index].hasFocus ||
-                                    priceFocusNode[index].hasFocus ||
-                                    decriptionFocusNode[index].hasFocus) {
-                                  titleFocusNode[index].unfocus();
-                                  priceFocusNode[index].unfocus();
-                                  decriptionFocusNode[index].unfocus();
-                                }
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(AppSize.s16),
-                              child: Form(
-                                key: _formKeys[index],
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    //TODO: title
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s16),
-                                      child: TextFormField(
-                                        // The validator receives the text that the user has entered.
-                                        controller: titleController[index],
-                                        focusNode: titleFocusNode[index],
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return AppLocalizations.of(context)!
-                                                .enterSomeText;
-                                          }
-                                          return null;
-                                        },
-                                        autofillHints: const [
-                                          AutofillHints.username
-                                        ],
-                                        decoration: InputDecoration(
-                                            labelText:
-                                                AppLocalizations.of(context)!
-                                                    .titleEvent,
-                                            border: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: ColorName.black,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s8))),
-                                      ),
-                                    ),
-                                    //TODO: prices
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s16),
-                                      child: TextFormField(
-                                        // The validator receives the text that the user has entered.
-                                        controller: priceController[index],
-                                        focusNode: priceFocusNode[index],
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return AppLocalizations.of(context)!
-                                                .enterPrices;
-                                          }
-                                          return null;
-                                        },
-                                        autofillHints: const [
-                                          AutofillHints.username
-                                        ],
-                                        inputFormatters: [
-                                          CurrencyInputFormatter(
-                                              thousandSeparator:
-                                                  ThousandSeparator.Period,
-                                              mantissaLength: 0,
-                                              trailingSymbol: 'đ')
-                                        ],
-
-                                        keyboardType: TextInputType.number,
-                                        decoration: InputDecoration(
-                                            labelText:
-                                                AppLocalizations.of(context)!
-                                                    .pricesEvent,
-                                            border: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: ColorName.black,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s8))),
-                                      ),
-                                    ),
-
-                                    // //TODO: Select calendar
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s16),
-                                      child: DropdownMenu<Calendar>(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        initialSelection:
-                                            currentState.calendars!.first,
-                                        inputDecorationTheme:
-                                            InputDecorationTheme(
-                                          enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                        ),
-                                        controller: calendarController,
-                                        requestFocusOnTap: false,
-                                        label: Text(
-                                            AppLocalizations.of(context)!
-                                                .typeEvent),
-                                        onSelected: (Calendar? value) {
-                                          setState(() {
-                                            calendar = value ??
-                                                currentState.calendars!.first;
-                                          });
-                                        },
-                                        dropdownMenuEntries: currentState
-                                            .calendars!
-                                            .map<DropdownMenuEntry<Calendar>>(
-                                                (Calendar calendar) {
-                                          return DropdownMenuEntry<Calendar>(
-                                            value: calendar,
-                                            label: calendar.name ?? "",
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ),
-
-                                    //TODO: date time
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s8),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .startTimeEvent,
-                                        style: const TextStyle(
-                                            color: ColorName.black,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-
-                                    //TODO: date time
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s16),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: TextFormField(
-                                              // The validator receives the text that the user has entered.
-
-                                              enabled: false,
-                                              autofillHints: const [
-                                                AutofillHints.username
-                                              ],
-                                              decoration: InputDecoration(
-                                                  hintText: DateFormat(
-                                                          Constants.DAY_FORMAT)
-                                                      .format(widget.controller
-                                                              .selectedDates![
-                                                          index]),
-                                                  border: OutlineInputBorder(
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: ColorName.black,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              AppSize.s8))),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: AppSize.s8),
-                                            child: GestureDetector(
-                                                onTap: () async {
-                                                  await _selectTime(startTime,
-                                                      context, index, true);
-                                                },
-                                                child: Container(
-                                                  // margin: const EdgeInsets.all(15.0),
-                                                  height: 55,
-                                                  padding:
-                                                      const EdgeInsets.all(3.0),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                          color:
-                                                              ColorName.black)),
-                                                  child: Center(
-                                                    child: Text(
-                                                      DateFormat(Constants
-                                                              .HOUR_FORMAT)
-                                                          .format(startTime![
-                                                              index]),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: const TextStyle(
-                                                          fontSize: 16),
-                                                    ),
-                                                  ),
-                                                )),
-                                          ),
-                                          const SizedBox(width: AppSize.s10),
-                                        ],
-                                      ),
-                                    ),
-                                    //TODO: end date time
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s8),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .endTimeEvent,
-                                        style: const TextStyle(
-                                            color: ColorName.black,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-
-                                    //TODO: end date time
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s16),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: TextFormField(
-                                              // The validator receives the text that the user has entered.
-
-                                              enabled: false,
-                                              autofillHints: const [
-                                                AutofillHints.username
-                                              ],
-                                              decoration: InputDecoration(
-                                                  hintText: DateFormat(
-                                                          Constants.DAY_FORMAT)
-                                                      .format(widget.controller
-                                                              .selectedDates![
-                                                          index]),
-                                                  border: OutlineInputBorder(
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color: ColorName.black,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              AppSize.s8))),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: AppSize.s8),
-                                            child: GestureDetector(
-                                                onTap: () async {
-                                                  await _selectTime(endTime,
-                                                      context, index, false);
-                                                },
-                                                child: Container(
-                                                  // margin: const EdgeInsets.all(15.0),
-                                                  height: 55,
-                                                  padding:
-                                                      const EdgeInsets.all(3.0),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                          color:
-                                                              ColorName.black)),
-                                                  child: Center(
-                                                    child: Text(
-                                                      DateFormat(Constants
-                                                              .HOUR_FORMAT)
-                                                          .format(
-                                                              endTime![index]),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: const TextStyle(
-                                                          fontSize: 16),
-                                                    ),
-                                                  ),
-                                                )),
-                                          ),
-                                          const SizedBox(width: AppSize.s10),
-                                        ],
-                                      ),
-                                    ),
-
-                                    //TODO: decription
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s8),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .decriptionEvent,
-                                        style: const TextStyle(
-                                            color: ColorName.black,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: AppSize.s16),
-                                      child: TextFormField(
-                                        controller: decriptionController[index],
-                                        focusNode: decriptionFocusNode[index],
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: 10,
-                                        autofillHints: const [
-                                          AutofillHints.username
-                                        ],
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: ColorName.black,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s8))),
-                                      ),
-                                    ),
-                                    //TODO: button submit
-                                    Row(
-                                      children: [
-                                        Flexible(
-                                          flex: 6,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 16),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor: ColorName
-                                                        .bgAppBar,
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    AppSize
-                                                                        .s8))),
-                                                onPressed: () async {
-                                                  await _createEventCalendar(
-                                                      index, calendar);
-                                                },
-                                                child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .createEvent,
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color:
-                                                          ColorName.colorGrey2),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 16),
-                                            child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor: ColorName
-                                                        .bgTagUnPaid,
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    AppSize
-                                                                        .s8))),
-                                                onPressed: () async {
-                                                  setState(() {
-                                                    listSelectTime
-                                                        ?.removeAt(index);
-                                                  });
-                                                  if (listSelectTime!.isEmpty) {
-                                                    GoRouter.of(navigatorKey
-                                                            .currentContext!)
-                                                        .pushReplacement(
-                                                            HomePage.routeName);
-                                                  }
-                                                },
-                                                child: const Center(
-                                                    child: Icon(
-                                                  Icons.delete,
-                                                  color: ColorName.white,
-                                                ))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                        itemBuilder: (context, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            DateTimeLabel(
+                                listSelectTime: listSelectTime![index]),
+                            ItemNote(
+                              index: index,
+                              formKeys: formKeys,
+                              titleFocusNode: titleFocusNode,
+                              priceFocusNode: priceFocusNode,
+                              decriptionFocusNode: decriptionFocusNode,
+                              titleController: titleController,
+                              priceController: priceController,
+                              decriptionController: decriptionController,
+                              listSelectTime: listSelectTime!,
+                              calendars: currentState.calendars!,
+                              eventCalendarImpl: eventCalendarImpl,
+                              createShowDetailController:
+                                  createShowDetailController,
+                              calendarController: calendarController,
+                              controller: widget.controller,
+                              startTime: startTime,
+                              endTime: endTime,
+                              callBack: (listSelectTime) {
+                                listSelectTime = listSelectTime ?? [];
+                                setState(() {});
+                              },
+                              selectTimeCallBack:
+                                  (index, startTimeSelected, endTimeSelected) {
+                                startTime?[index] = startTimeSelected!;
+                                endTime?[index] = endTimeSelected!;
+                                setState(() {});
+                              },
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: 70,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                    )),
+                                    onPressed: () {},
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: ColorName.colorGrey2,
+                                    )),
+                              ),
+                            )
+                          ],
                         ),
                       );
               },
@@ -562,127 +203,5 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
             child: CircularProgressIndicator(),
           );
         });
-  }
-
-  Future<void> _createEventCalendar(int index, Calendar calendar) async {
-    if (_formKeys[index].currentState!.validate()) {
-      // Validate returns true if the form is valid, or false otherwise.\
-      final eventCalendar = EventCalendar(
-          name: titleController[index].text,
-          price: priceController[index].text,
-          decription: decriptionController[index].text,
-          startDate: startTime != null ? startTime![index] : DateTime.now(),
-          endDate: endTime != null ? endTime![index] : DateTime.now(),
-          isPaid: false);
-
-      final createEventDevice = await eventCalendarImpl
-          .createEventToCalendarDevice(eventCalendar, calendar);
-      if (createEventDevice?.isSuccess ?? false) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.senDataSuccessfull),
-          ),
-        );
-        _removeEvent(index);
-      }
-    }
-  }
-
-  void _removeEvent(int index) {
-    setState(() {
-      // Remove the corresponding elements
-      listSelectTime?.removeAt(index);
-
-      titleController[index].dispose();
-      priceController[index].dispose();
-      decriptionController[index].dispose();
-      titleController.removeAt(index);
-      priceController.removeAt(index);
-      decriptionController.removeAt(index);
-
-      titleFocusNode[index].dispose();
-      priceFocusNode[index].dispose();
-      decriptionFocusNode[index].dispose();
-      titleFocusNode.removeAt(index);
-      priceFocusNode.removeAt(index);
-      decriptionFocusNode.removeAt(index);
-    });
-
-    // Check if list is empty
-    if (listSelectTime!.isEmpty) {
-      GoRouter.of(navigatorKey.currentContext!)
-          .pushReplacement(HomePage.routeName);
-    }
-  }
-
-  Future<void> _selectTime(List<DateTime>? initialDate, BuildContext context,
-      int index, bool isStart) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime:
-          TimeOfDay.fromDateTime(widget.controller.selectedDates![index]),
-    );
-
-    if (picked != null) {
-      setState(() {
-        final selectedDate = DateTime(
-          widget.controller.selectedDates![index].year,
-          widget.controller.selectedDates![index].month,
-          widget.controller.selectedDates![index].day,
-          picked.hour,
-          picked.minute,
-        );
-
-        // Get the current time for comparison
-        final now = DateTime.now();
-        final currentDate =
-            DateTime(now.year, now.month, now.day, now.hour, now.minute);
-
-        // Check if the selected date is today
-        if (selectedDate.isBefore(currentDate) &&
-            selectedDate.year == now.year &&
-            selectedDate.month == now.month &&
-            selectedDate.day == now.day) {
-          startTime![index] = DateTime.now().add(const Duration(minutes: 30));
-          endTime![index] = startTime![index].add(const Duration(hours: 1));
-          // Show error message if the selected time is earlier than the current time today
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content:
-                  Text(AppLocalizations.of(context)!.selectDayLaterCurrentDay),
-            ),
-          );
-          return; // Exit the function early
-        }
-
-        if (isStart) {
-          // Update startTime at the given index
-          startTime![index] = selectedDate;
-
-          // If endTime exists and is earlier than startTime, reset endTime
-          if (endTime![index].isBefore(startTime![index])) {
-            endTime![index] = startTime![index].add(const Duration(hours: 1));
-          }
-        } else {
-          // If endTime is earlier than startTime, show an error and reset endTime
-          if (selectedDate.isBefore(startTime![index])) {
-            endTime![index] = startTime![index].add(const Duration(hours: 1));
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content:
-                    Text(AppLocalizations.of(context)!.endTimeEarlyStartTime),
-              ),
-            );
-          } else {
-            // Update endTime at the given index
-            endTime![index] = selectedDate;
-          }
-        }
-      });
-    }
-  }
-
-  void _load() {
-    widget._createShowDetailBloc.add(LoadCreateShowDetailEvent());
   }
 }

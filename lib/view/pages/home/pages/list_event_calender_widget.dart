@@ -198,6 +198,7 @@ class _ListEventCalendarWidgetState extends State<ListEventCalendarWidget> {
                                               "");
                                       widget.homePageImpl.delete(
                                           widget.lstEventCalendar[index].id);
+                                      if (!context.mounted) return;
                                       GoRouter.of(context).pop();
                                     },
                                     onDeny: () {
@@ -312,6 +313,34 @@ class _ListEventCalendarWidgetState extends State<ListEventCalendarWidget> {
             child: Row(
               children: [
                 const Icon(
+                  Icons.date_range_rounded,
+                  size: AppSize.s14,
+                  weight: 400,
+                  color: ColorName.colorGrey2,
+                ),
+                const SizedBox(
+                  width: AppSize.s4,
+                ),
+                Expanded(
+                  child: Text(
+                    DateFormat(Constants.DAY_FORMAT).format(
+                        widget.lstEventCalendar[index].startDate ??
+                            DateTime.now()),
+                    style: const TextStyle(
+                      fontSize: FontSize.s12,
+                      color: ColorName.colorGrey2,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppMargin.m8),
+            child: Row(
+              children: [
+                const Icon(
                   Icons.access_time,
                   size: AppSize.s14,
                   weight: 400,
@@ -322,8 +351,6 @@ class _ListEventCalendarWidgetState extends State<ListEventCalendarWidget> {
                 ),
                 Expanded(
                   child: Text(
-                    '${DateFormat(Constants.DAY_FORMAT).format(widget.lstEventCalendar[index].startDate ?? DateTime.now())} -'
-                    // ignore: lines_longer_than_80_chars
                     ' ${DateFormat(Constants.HOUR_FORMAT).format(widget.lstEventCalendar[index].startDate ?? DateTime.now())} to ${DateFormat(Constants.HOUR_FORMAT).format(widget.lstEventCalendar[index].endDate ?? DateTime.now())}',
                     style: const TextStyle(
                       fontSize: FontSize.s12,

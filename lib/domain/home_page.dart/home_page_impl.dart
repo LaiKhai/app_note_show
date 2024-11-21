@@ -3,6 +3,7 @@ import 'package:Noteshow/domain/event_calendar.dart/event_calendar_model.dart';
 import 'package:Noteshow/view/pages/home/bloc/statistic_bloc/index.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../main.dart';
 import '../../view/pages/home/index.dart';
 
 @LazySingleton()
@@ -18,8 +19,8 @@ class HomePageImpl implements HomePageRepo {
   }
 
   @override
-  void load() {
-    homeBlocImpl.add(LoadHomeEvent());
+  void load({NotesEnum? noteEnum}) {
+    homeBlocImpl.add(LoadHomeEvent(status: noteEnum ?? NotesEnum.ALL));
     statisticBlocImpl.add(CountTotalShowEvent());
   }
 

@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
-import 'package:Noteshow/view/pages/profile/profile/index.dart';
 import 'package:meta/meta.dart';
+
+import 'package:Noteshow/view/pages/profile/profile/index.dart';
 
 @immutable
 abstract class ProfileEvent {
@@ -12,23 +13,24 @@ abstract class ProfileEvent {
 
 class UnProfileEvent extends ProfileEvent {
   @override
-  Stream<ProfileState> applyAsync({ProfileState? currentState, ProfileBloc? bloc}) async* {
-    yield UnProfileState();
+  Stream<ProfileState> applyAsync(
+      {ProfileState? currentState, ProfileBloc? bloc}) async* {
+    yield const UnProfileState();
   }
 }
 
 class LoadProfileEvent extends ProfileEvent {
-   
   @override
   Stream<ProfileState> applyAsync(
       {ProfileState? currentState, ProfileBloc? bloc}) async* {
     try {
-      yield UnProfileState();
+      yield const UnProfileState();
       await Future.delayed(const Duration(seconds: 1));
-      yield InProfileState('Hello world');
+      yield const InProfileState('Hello world');
     } catch (_, stackTrace) {
-      developer.log('$_', name: 'LoadProfileEvent', error: _, stackTrace: stackTrace);
-      yield ErrorProfileState( _.toString());
+      developer.log('$_',
+          name: 'LoadProfileEvent', error: _, stackTrace: stackTrace);
+      yield ErrorProfileState(_.toString());
     }
   }
 }

@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 import '../pages/create_show_detail/index.dart';
 
 class ExpandedLongTextWidget extends StatefulWidget {

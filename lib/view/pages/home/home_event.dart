@@ -1,11 +1,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
-import 'package:intl/intl.dart';
-
-import '../../../domain/services/isar_services.dart';
-import '../create_show_detail/index.dart';
-import 'index.dart';
+import 'package:Noteshow/index.dart';
 
 @immutable
 abstract class HomeEvent {
@@ -22,13 +18,44 @@ class UnHomeEvent extends HomeEvent {
 
 class LoadHomeEvent extends HomeEvent {
   final IsarServices isarServices = di.get();
+  final NotesEnum status;
+
+  LoadHomeEvent({this.status = NotesEnum.ALL});
 
   @override
   Stream<HomeState> applyAsync(
       {HomeState? currentState, HomeBloc? bloc}) async* {
     try {
+      List<EventCalendar> lstEventCalendar = [];
       yield const UnHomeState();
-      final lstEventCalendar = await isarServices.getAllData();
+      switch (status) {
+        case NotesEnum.ALL:
+          {
+            lstEventCalendar = await isarServices.getAllData();
+            break;
+          }
+        case NotesEnum.PAID:
+          {
+            lstEventCalendar = await isarServices.getPaidData();
+            break;
+          }
+        case NotesEnum.UNPAID:
+          {
+            lstEventCalendar = await isarServices.getUnPaidData();
+            break;
+          }
+        case NotesEnum.OVERDUE:
+          {
+            lstEventCalendar = await isarServices.getOverdueData();
+            break;
+          }
+        default:
+          {
+            lstEventCalendar = await isarServices.getAllData();
+            break;
+          }
+      }
+
       List<DateTime> mergedList = groupDateTime(lstEventCalendar);
       yield InHomeState(lstEventCalendar, mergedList);
     } catch (_, stackTrace) {

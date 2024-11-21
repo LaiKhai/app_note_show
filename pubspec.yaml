@@ -37,6 +37,7 @@ dependencies:
   intl: ^0.19.0
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
+  meta: ^1.15.0
   path_provider: ^2.1.4
   permission_handler: ^11.3.1
   pretty_dio_logger: ^1.4.0

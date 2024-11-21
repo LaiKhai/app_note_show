@@ -3,8 +3,6 @@ import 'dart:developer' as developer;
 
 import 'package:Noteshow/view/pages/create_show_detail/create_show_detail_controller.dart';
 import 'package:Noteshow/view/pages/create_show_detail/index.dart';
-import 'package:device_calendar/device_calendar.dart';
-import 'package:meta/meta.dart';
 
 @immutable
 abstract class CreateShowDetailEvent {

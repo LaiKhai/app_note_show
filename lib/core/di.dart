@@ -40,8 +40,8 @@ Future<void> initAppModule() async {
   final dio = await di<DioFactory>().getDio();
 
   if (kDebugMode) {
-    print("${GetIt.I.isRegistered<NetworkInfo>()} " "NetworkInfo");
-    print("${GetIt.I.isRegistered<DioFactory>()} " "DioFactory");
+    debugPrint("${GetIt.I.isRegistered<NetworkInfo>()} " "NetworkInfo");
+    debugPrint("${GetIt.I.isRegistered<DioFactory>()} " "DioFactory");
   }
 
   //AppServiceClient instance

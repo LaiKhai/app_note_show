@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 
 import '../../../index.dart';
-import '../../pages/create_show_detail/index.dart';
 
 @singleton
 class BottomSheetModal {
@@ -62,7 +61,7 @@ class BottomSheetModal {
                               try {
                                 GoRouter.of(context).pop();
                               } on PlatformException catch (e) {
-                                print(e);
+                                debugPrint("$e");
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -189,7 +188,7 @@ class BottomSheetModal {
                                   );
                                 }
                               } on PlatformException catch (e) {
-                                print(e);
+                                debugPrint("$e");
                               }
                             },
                             style: ElevatedButton.styleFrom(

@@ -9,6 +9,8 @@ import 'core/router/go_route_config.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+enum NotesEnum { ALL, PAID, UNPAID, OVERDUE }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initAppModule();

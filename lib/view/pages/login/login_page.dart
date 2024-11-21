@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final _loginBloc = LoginBloc(UnLoginState());
+  final _loginBloc = LoginBloc(const UnLoginState());
 
   @override
   Widget build(BuildContext context) {

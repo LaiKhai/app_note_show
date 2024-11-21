@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 abstract class ProfileState extends Equatable {
-  ProfileState();
+  const ProfileState();
 
   @override
   List<Object> get props => [];
@@ -9,8 +9,7 @@ abstract class ProfileState extends Equatable {
 
 /// UnInitialized
 class UnProfileState extends ProfileState {
-
-  UnProfileState();
+  const UnProfileState();
 
   @override
   String toString() => 'UnProfileState';
@@ -18,8 +17,8 @@ class UnProfileState extends ProfileState {
 
 /// Initialized
 class InProfileState extends ProfileState {
-  InProfileState(this.hello);
-  
+  const InProfileState(this.hello);
+
   final String hello;
 
   @override
@@ -30,10 +29,10 @@ class InProfileState extends ProfileState {
 }
 
 class ErrorProfileState extends ProfileState {
-  ErrorProfileState(this.errorMessage);
- 
+  const ErrorProfileState(this.errorMessage);
+
   final String errorMessage;
-  
+
   @override
   String toString() => 'ErrorProfileState';
 

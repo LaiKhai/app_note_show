@@ -28,7 +28,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         focusNode: searchFocusNode,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
-          hintText: 'search text',
+          hintText: AppLocalizations.of(context)!.searchText,
           hintStyle: const TextStyle(color: ColorName.colorGrey2),
           prefixIcon: IconButton(
             onPressed: () {

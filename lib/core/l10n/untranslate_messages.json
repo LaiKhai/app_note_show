@@ -3,6 +3,11 @@
     "next",
     "selectedItems",
     "deleted",
-    "payOrUnPay"
+    "payOrUnPay",
+    "totalShowPerMonth",
+    "totalMoneyPerMonth",
+    "searchText",
+    "all",
+    "overdue"
   ]
 }

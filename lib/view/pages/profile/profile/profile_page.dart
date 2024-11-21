@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:Noteshow/view/pages/profile/profile/index.dart';
-
 import '../../../../index.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class ProfilePageState extends State<ProfilePage> {
-  final _profileBloc = ProfileBloc(UnProfileState());
+  final _profileBloc = ProfileBloc(const UnProfileState());
 
   @override
   Widget build(BuildContext context) {

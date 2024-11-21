@@ -99,4 +99,36 @@ class IsarServices implements IsarRepo {
 
     return countTotalAmount;
   }
+
+  @override
+  Future<List<EventCalendar>> getOverdueData() async {
+    final isar = await db;
+
+    final listOverDueData = isar.eventCalendars
+        .filter()
+        .startDateLessThan(DateTime.now())
+        .findAllSync();
+
+    return listOverDueData;
+  }
+
+  @override
+  Future<List<EventCalendar>> getPaidData() async {
+    final isar = await db;
+
+    final listPaidData =
+        isar.eventCalendars.filter().isPaidEqualTo(true).findAllSync();
+
+    return listPaidData;
+  }
+
+  @override
+  Future<List<EventCalendar>> getUnPaidData() async {
+    final isar = await db;
+
+    final listUnPaidData =
+        isar.eventCalendars.filter().isPaidEqualTo(false).findAllSync();
+
+    return listUnPaidData;
+  }
 }

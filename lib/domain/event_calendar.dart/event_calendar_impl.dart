@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:injectable/injectable.dart';
-import 'package:timezone/timezone.dart' as tz;
 import '../../core/di.dart';
 import '../../data/repository/event_calendar_repo.dart';
 
@@ -96,7 +95,7 @@ class EventCalendarImpl implements EventCalendarRepo {
 
       final eventData = await deviceCalendarPlugin.retrieveEvents(calendar.id,
           RetrieveEventsParams(startDate: startDate, endDate: endDate));
-      print(eventData);
+      debugPrint("$eventData");
       eventCalendar.eventId = dataEvent?.data ?? "";
 
       createEventCalendar(eventCalendar, calendar);

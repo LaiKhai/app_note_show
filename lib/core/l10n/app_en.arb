@@ -75,8 +75,10 @@
 
   "labelDelete": "Delete",
   "@labelDelete": {},
+
   "unpaid": "UnPaid",
   "@unpaid": {},
+
   "paid": "Paid",
   "@paid": {},
 
@@ -135,6 +137,20 @@
   "@deleted": {},
 
   "payOrUnPay": "Pay/UnPay",
-  "@payOrUnPay": {}
+  "@payOrUnPay": {},
 
+  "totalShowPerMonth": "Total shows per month",
+  "@totalShowPerMonth": {},
+
+  "totalMoneyPerMonth": "Total money per month",
+  "@totalMoneyPerMonth": {},
+
+  "searchText": "Search text",
+  "@searchText": {},
+
+  "all": "All",
+  "@all": {},
+
+  "overdue": "Overdue",
+  "@overdue": {}
 }

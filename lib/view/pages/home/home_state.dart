@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
 
 import '../create_show_detail/index.dart';
 

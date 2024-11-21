@@ -8,6 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../index.dart';
 import 'bloc/statistic_bloc/index.dart';
 import 'pages/search_bar_widget.dart';
+import 'pages/statistical_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -32,12 +33,33 @@ class HomeScreenState extends State<HomeScreen>
   final HomePageImpl homePageImpl = di.get();
   final controller = ScrollController();
   List<EventCalendar> lstEventCalendar = [];
+  late final TabController _tabController;
+  var currentTabIndex = 0;
 
   @override
   void initState() {
     listenController();
     super.initState();
     homePageImpl.load();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  void _onTabChanged(int index) async {
+    switch (index) {
+      case 0:
+        homePageImpl.load(noteEnum: NotesEnum.ALL);
+        break;
+      case 1:
+        homePageImpl.load(noteEnum: NotesEnum.PAID);
+        break;
+      case 2:
+        homePageImpl.load(noteEnum: NotesEnum.UNPAID);
+        break;
+      case 3:
+        homePageImpl.load(noteEnum: NotesEnum.OVERDUE);
+        break;
+      default:
+    }
   }
 
   void listenController() {
@@ -63,7 +85,6 @@ class HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SearchBarWidget(),
         BlocBuilder<StatisticBlocBloc, StatisticBlocState>(
           bloc: homePageImpl.statisticBlocImpl,
           builder: (context, state) {
@@ -77,134 +98,117 @@ class HomeScreenState extends State<HomeScreen>
               children: [
                 StatisticalWidget(
                   controller: countShowController,
-                  title: 'Total show per month',
+                  title: AppLocalizations.of(context)!.totalShowPerMonth,
                 ),
                 StatisticalWidget(
                   controller: countAmountController,
-                  title: 'Total money per month',
+                  title: AppLocalizations.of(context)!.totalMoneyPerMonth,
                 ),
               ],
             );
           },
         ),
-        BlocBuilder<HomeBloc, HomeState>(
-            bloc: homePageImpl.homeBlocImpl,
-            builder: (
-              BuildContext context,
-              HomeState currentState,
-            ) {
-              if (currentState is UnHomeState) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (currentState is ErrorHomeState) {
-                return Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(currentState.errorMessage),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 32.0),
-                      child: ElevatedButton(
-                        onPressed: homePageImpl.load,
-                        child: Text(AppLocalizations.of(context)!.reload),
-                      ),
-                    ),
-                  ],
-                ));
-              }
-
-              if (currentState is SearchTitleHomeState) {
-                return ListEventCalendarWidget(
-                  controller: controller,
-                  lstEventCalendar: currentState.lstEventCalendar,
-                  homePageImpl: homePageImpl,
-                );
-              }
-              if (currentState is FilterHomeState) {
-                return ListEventCalendarWidget(
-                  controller: controller,
-                  lstEventCalendar: currentState.lstEventCalendar,
-                  homePageImpl: homePageImpl,
-                );
-              }
-              if (currentState is InHomeState) {
-                lstEventCalendar = currentState.lstEventCalendar;
-              }
-
-              return lstEventCalendar.isEmpty
-                  ? Center(
-                      child: EmptyPage(
-                        bodyText: AppLocalizations.of(context)?.emptyPage ?? "",
-                        onPressedText:
-                            AppLocalizations.of(context)?.createNote ?? "",
-                        onPressed: () {
-                          try {
-                            GoRouter.of(navigatorKey.currentContext!)
-                                .go(CalendarPage.routeName);
-                          } on PlatformException catch (e) {
-                            EasyLoading.showError(e.toString());
-                          }
-                        },
-                      ),
-                    )
-                  : ListEventCalendarWidget(
-                      controller: controller,
-                      lstEventCalendar: lstEventCalendar,
-                      homePageImpl: homePageImpl,
-                    );
-            }),
+        const SearchBarWidget(),
+        TabBar(
+          controller: _tabController,
+          // give the indicator a decoration (color and border radius)
+          indicatorColor: Colors.grey,
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey, dividerColor: Colors.transparent,
+          isScrollable: true,
+          tabAlignment: TabAlignment.start,
+          onTap: _onTabChanged,
+          tabs: [
+            Tab(
+              text: AppLocalizations.of(context)!.all,
+            ),
+            Tab(
+              text: AppLocalizations.of(context)!.paid,
+            ),
+            Tab(
+              text: AppLocalizations.of(context)!.unpaid,
+            ),
+            Tab(
+              text: AppLocalizations.of(context)!.overdue,
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        listNoteSection()
       ],
     );
   }
-}
 
-class StatisticalWidget extends StatelessWidget {
-  final String? title;
-  final double? fontSize;
-  final AnimatedDigitController controller;
-  const StatisticalWidget({
-    super.key,
-    this.title,
-    required this.controller,
-    this.fontSize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-            height: 80,
-            decoration: BoxDecoration(
-                color: ColorName.colorGrey3,
-                borderRadius: BorderRadius.circular(8)),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AnimatedDigitWidget(
-                    autoSize: false,
-                    controller: controller,
-                    textStyle: DefaultTextStyle.of(context).style.copyWith(
-                        color: ColorName.black,
-                        fontSize: fontSize ?? FontSize.s14,
-                        fontWeight: FontWeight.bold),
-                    enableSeparator: true,
+  Widget listNoteSection() {
+    return BlocBuilder<HomeBloc, HomeState>(
+        bloc: homePageImpl.homeBlocImpl,
+        builder: (
+          BuildContext context,
+          HomeState currentState,
+        ) {
+          if (currentState is UnHomeState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (currentState is ErrorHomeState) {
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(currentState.errorMessage),
+                Padding(
+                  padding: const EdgeInsets.only(top: 32.0),
+                  child: ElevatedButton(
+                    onPressed: homePageImpl.load,
+                    child: Text(AppLocalizations.of(context)!.reload),
                   ),
-                  Text(
-                    title ?? 'total shows per month',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: ColorName.colorGrey2, fontSize: 10),
-                  )
-                ],
-              ),
-            )),
-      ),
-    );
+                ),
+              ],
+            ));
+          }
+
+          if (currentState is SearchTitleHomeState) {
+            return ListEventCalendarWidget(
+              controller: controller,
+              lstEventCalendar: currentState.lstEventCalendar,
+              homePageImpl: homePageImpl,
+            );
+          }
+          if (currentState is FilterHomeState) {
+            return ListEventCalendarWidget(
+              controller: controller,
+              lstEventCalendar: currentState.lstEventCalendar,
+              homePageImpl: homePageImpl,
+            );
+          }
+          if (currentState is InHomeState) {
+            lstEventCalendar = currentState.lstEventCalendar;
+          }
+
+          return lstEventCalendar.isEmpty
+              ? Center(
+                  child: EmptyPage(
+                    bodyText: AppLocalizations.of(context)?.emptyPage ?? "",
+                    onPressedText:
+                        AppLocalizations.of(context)?.createNote ?? "",
+                    onPressed: () {
+                      try {
+                        GoRouter.of(navigatorKey.currentContext!)
+                            .go(CalendarPage.routeName);
+                      } on PlatformException catch (e) {
+                        EasyLoading.showError(e.toString());
+                      }
+                    },
+                  ),
+                )
+              : ListEventCalendarWidget(
+                  controller: controller,
+                  lstEventCalendar: lstEventCalendar,
+                  homePageImpl: homePageImpl,
+                );
+        });
   }
 }

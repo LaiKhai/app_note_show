@@ -1,14 +1,9 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:Noteshow/view/pages/profile/profile/index.dart';
 
 import '../../../../index.dart';
-import '../../create_show_detail/index.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
@@ -30,7 +25,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   final qrData = TextEditingController();
   final displayData = TextEditingController();
   Dio dio = Dio();
-  Uint8List? _imageBytes;
 
   @override
   void initState() {
@@ -51,9 +45,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       headers: {"Content-Type": "application/json"},
     );
     if (response.statusCode == 200) {
-      setState(() {
-        _imageBytes = response.bodyBytes;
-      });
+      setState(() {});
     }
   }
 

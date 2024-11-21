@@ -16,7 +16,10 @@ class CreateShowDetailPageState extends State<CreateShowDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: ColorName.colorGrey3,
+      ),
+      backgroundColor: ColorName.colorGrey3,
       body: CreateShowDetailScreen(
         controller: widget.controller,
         createShowDetailBloc: _createShowDetailBloc,
