@@ -1,3 +1,4 @@
+import '../../../domain/model/form_item.dart';
 import '../../../index.dart';
 
 class CreateShowDetailScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
   final TextEditingController calendarController = TextEditingController();
   late final List<DateTime>? startTime;
   late final List<DateTime>? endTime;
+  late final List<FormItem> formItems;
 
   List<DateTime>? listSelectTime = [];
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -44,34 +46,55 @@ class CreateShowDetailScreenState extends State<CreateShowDetailScreen> {
     if (widget.controller.selectedDates != null) {
       listSelectTime = widget.controller.selectedDates ?? [];
       listSelectTime?.sort();
-      formKeys = List.generate(
-          listSelectTime!.length, (index) => GlobalKey<FormState>());
-      titleFocusNode =
-          List.generate(listSelectTime!.length, (index) => FocusNode());
-      priceFocusNode =
-          List.generate(listSelectTime!.length, (index) => FocusNode());
-      decriptionFocusNode =
-          List.generate(listSelectTime!.length, (index) => FocusNode());
-      titleController = List.generate(
-          listSelectTime!.length, (index) => TextEditingController());
-      priceController = List.generate(
-          listSelectTime!.length, (index) => TextEditingController());
-      decriptionController = List.generate(
-          listSelectTime!.length, (index) => TextEditingController());
-      startTime = widget.controller.selectedDates!.map((date) {
-        final now = DateTime.now();
-        return DateTime(
-                date.year,
-                date.month,
-                date.day,
-                now.hour, // Current hour
-                now.minute // Current minute
-                )
-            .add(const Duration(minutes: 30));
-      }).toList();
+      // formKeys = List.generate(
+      //     listSelectTime!.length, (index) => GlobalKey<FormState>());
+      // titleFocusNode =
+      //     List.generate(listSelectTime!.length, (index) => FocusNode());
+      // priceFocusNode =
+      //     List.generate(listSelectTime!.length, (index) => FocusNode());
+      // decriptionFocusNode =
+      //     List.generate(listSelectTime!.length, (index) => FocusNode());
+      // titleController = List.generate(
+      //     listSelectTime!.length, (index) => TextEditingController());
+      // priceController = List.generate(
+      //     listSelectTime!.length, (index) => TextEditingController());
+      // decriptionController = List.generate(
+      //     listSelectTime!.length, (index) => TextEditingController());
+      // startTime = widget.controller.selectedDates!.map((date) {
+      //   final now = DateTime.now();
+      //   return DateTime(
+      //           date.year,
+      //           date.month,
+      //           date.day,
+      //           now.hour, // Current hour
+      //           now.minute // Current minute
+      //           )
+      //       .add(const Duration(minutes: 30));
+      // }).toList();
 
-      endTime =
-          startTime!.map((date) => date.add(const Duration(hours: 1))).toList();
+      // endTime =
+      //     startTime!.map((date) => date.add(const Duration(hours: 1))).toList();
+      if (listSelectTime != null) {
+        formItems = listSelectTime!.map((date) {
+          final now = DateTime.now();
+          final start =
+              DateTime(date.year, date.month, date.day, now.hour, now.minute)
+                  .add(const Duration(minutes: 30));
+          final end = start.add(const Duration(hours: 1));
+
+          return FormItem(
+            formKey: GlobalKey<FormState>(),
+            titleFocusNode: FocusNode(),
+            priceFocusNode: FocusNode(),
+            descriptionFocusNode: FocusNode(),
+            titleController: TextEditingController(),
+            priceController: TextEditingController(),
+            descriptionController: TextEditingController(),
+            startTime: start,
+            endTime: end,
+          );
+        }).toList();
+      }
     }
   }
 
