@@ -2,7 +2,6 @@ import 'package:Noteshow/view/pages/home/pages/list_event_calender_widget.dart';
 import 'package:animated_digit/animated_digit.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../index.dart';
 import 'bloc/statistic_bloc/index.dart';
@@ -28,7 +27,6 @@ class HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final countShowController = AnimatedDigitController(0.00);
   final countAmountController = AnimatedDigitController(0.00);
-  late final slideableController = SlidableController(this);
   final HomePageImpl homePageImpl = di.get();
   final controller = ScrollController();
   List<EventCalendar> lstEventCalendar = [];

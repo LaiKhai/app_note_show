@@ -1,4 +1,4 @@
-name: Noteshow
+name: app_note_show
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -25,7 +25,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_multi_formatter: ^2.13.0
-  flutter_slidable: ^3.1.1
+  flutter_slidable: ^4.0.0
   flutter_svg: ^2.0.10+1
   flutter_timezone: ^3.0.1
   get_it: ^7.7.0
